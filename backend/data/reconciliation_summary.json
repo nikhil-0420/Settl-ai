@@ -1,26 +1,30 @@
 {
-  "total_records": 83,
-  "match_rate": 0.7952,
+  "total_records": 87,
+  "match_rate": 0.7701,
   "breakdown": {
     "clean_match": {
-      "count": 66,
+      "count": 67,
       "avg_confidence": 100.0
-    },
-    "fee_deduction_err": {
-      "count": 3,
-      "avg_confidence": 90.0
-    },
-    "timing_gap": {
-      "count": 3,
-      "avg_confidence": 75.0
-    },
-    "partial_payment": {
-      "count": 3,
-      "avg_confidence": 90.0
     },
     "duplicate": {
       "count": 4,
       "avg_confidence": 95.0
+    },
+    "tds_gst_mismatch": {
+      "count": 3,
+      "avg_confidence": 91.7
+    },
+    "timing_gap": {
+      "count": 3,
+      "avg_confidence": 78.3
+    },
+    "partial_payment": {
+      "count": 3,
+      "avg_confidence": 94.0
+    },
+    "fee_deduction_err": {
+      "count": 3,
+      "avg_confidence": 92.3
     },
     "phantom_bank": {
       "count": 2,
@@ -33,79 +37,79 @@
   },
   "records": [
     {
-      "order_id": "order_200000Q",
-      "settlement_id": "setl_300000X",
-      "utr": "1786041000y0",
+      "order_id": "order_200000V",
+      "settlement_id": "setl_300000B",
+      "utr": "1786041000d0",
       "status": "clean_match",
       "confidence": 100
     },
     {
-      "order_id": "order_200001T",
-      "settlement_id": "setl_300001C",
-      "utr": "1787250600b1",
+      "order_id": "order_200001N",
+      "settlement_id": "setl_300001A",
+      "utr": "1785868200y1",
       "status": "clean_match",
       "confidence": 100
     },
     {
-      "order_id": "order_200002P",
-      "settlement_id": "setl_300002E",
-      "utr": "1786991400y2",
+      "order_id": "order_200002S",
+      "settlement_id": "setl_300002F",
+      "utr": "1786559400b2",
       "status": "clean_match",
       "confidence": 100
     },
     {
-      "order_id": "order_200003S",
-      "settlement_id": "setl_300003B",
-      "utr": "1786127400x3",
+      "order_id": "order_200003T",
+      "settlement_id": "setl_300003X",
+      "utr": "1785609000b3",
       "status": "clean_match",
       "confidence": 100
     },
     {
-      "order_id": "order_200004L",
+      "order_id": "order_200004V",
       "settlement_id": "setl_300004X",
-      "utr": "1785868200b4",
-      "status": "fee_deduction_err",
-      "confidence": 90
-    },
-    {
-      "order_id": "order_200005S",
-      "settlement_id": "setl_300005F",
-      "utr": "1786732200c5",
+      "utr": "1786559400x4",
       "status": "clean_match",
       "confidence": 100
     },
     {
-      "order_id": "order_200006U",
-      "settlement_id": "setl_300006A",
-      "utr": "1787250600a6",
+      "order_id": "order_200005Q",
+      "settlement_id": "setl_300005E",
+      "utr": "1785522600y5",
       "status": "clean_match",
       "confidence": 100
     },
     {
-      "order_id": "order_200007N",
-      "settlement_id": "setl_300007D",
-      "utr": "1785522600y7",
+      "order_id": "order_200006Q",
+      "settlement_id": "setl_300006B",
+      "utr": "1785781800d6",
       "status": "clean_match",
       "confidence": 100
     },
     {
-      "order_id": "order_200008N",
-      "settlement_id": "setl_300008E",
-      "utr": "1785781800c8",
+      "order_id": "order_200007L",
+      "settlement_id": "setl_300007A",
+      "utr": "1786905000b7",
+      "status": "duplicate",
+      "confidence": 95
+    },
+    {
+      "order_id": "order_200007L",
+      "settlement_id": "setl_500007DUP",
+      "utr": "1786905000b7",
+      "status": "duplicate",
+      "confidence": 95
+    },
+    {
+      "order_id": "order_200009N",
+      "settlement_id": "setl_300009E",
+      "utr": "1786905000x9",
       "status": "clean_match",
       "confidence": 100
     },
     {
-      "order_id": "order_200009R",
-      "settlement_id": "setl_300009Y",
-      "utr": "1786991400x9",
-      "status": "clean_match",
-      "confidence": 100
-    },
-    {
-      "order_id": "order_200010R",
-      "settlement_id": "setl_300010D",
-      "utr": "1785522600c10",
+      "order_id": "order_200010L",
+      "settlement_id": "setl_300010X",
+      "utr": "1786473000z10",
       "status": "clean_match",
       "confidence": 100
     },
@@ -113,20 +117,20 @@
       "order_id": "order_200011L",
       "settlement_id": "setl_300011Z",
       "utr": "1787077800a11",
-      "status": "clean_match",
-      "confidence": 100
+      "status": "tds_gst_mismatch",
+      "confidence": 77
     },
     {
       "order_id": "order_200012U",
       "settlement_id": "setl_300012Y",
       "utr": "1785868200d12",
-      "status": "timing_gap",
-      "confidence": 75
+      "status": "clean_match",
+      "confidence": 100
     },
     {
-      "order_id": "order_200013V",
-      "settlement_id": "setl_300013C",
-      "utr": "1786041000z13",
+      "order_id": "order_200013U",
+      "settlement_id": "setl_300013F",
+      "utr": "1786645800x13",
       "status": "clean_match",
       "confidence": 100
     },
@@ -155,20 +159,20 @@
       "order_id": "order_200017M",
       "settlement_id": "setl_300017W",
       "utr": "1786386600x17",
-      "status": "partial_payment",
-      "confidence": 90
+      "status": "timing_gap",
+      "confidence": 78
     },
     {
       "order_id": "order_200018P",
       "settlement_id": "setl_300018E",
       "utr": "1785868200x18",
-      "status": "partial_payment",
-      "confidence": 90
+      "status": "clean_match",
+      "confidence": 100
     },
     {
-      "order_id": "order_200019S",
-      "settlement_id": "setl_300019Z",
-      "utr": "1785781800y19",
+      "order_id": "order_200019T",
+      "settlement_id": "setl_300019C",
+      "utr": "1786041000a19",
       "status": "clean_match",
       "confidence": 100
     },
@@ -190,34 +194,27 @@
       "order_id": "order_200022T",
       "settlement_id": "setl_300022Y",
       "utr": "1786645800c22",
-      "status": "timing_gap",
-      "confidence": 75
+      "status": "partial_payment",
+      "confidence": 91
     },
     {
-      "order_id": "order_200023T",
-      "settlement_id": "setl_300023E",
-      "utr": "1785781800y23",
-      "status": "clean_match",
-      "confidence": 100
+      "order_id": "order_200023M",
+      "settlement_id": "setl_300023D",
+      "utr": "1786991400a23",
+      "status": "fee_deduction_err",
+      "confidence": 79
     },
     {
       "order_id": "order_200024P",
       "settlement_id": "setl_300024Y",
       "utr": "1786645800d24",
-      "status": "clean_match",
-      "confidence": 100
-    },
-    {
-      "order_id": "order_200025L",
-      "settlement_id": "setl_300025Y",
-      "utr": "1786559400d25",
-      "status": "clean_match",
-      "confidence": 100
+      "status": "tds_gst_mismatch",
+      "confidence": 99
     },
     {
       "order_id": "order_200026Q",
-      "settlement_id": "setl_300026C",
-      "utr": "1786991400y26",
+      "settlement_id": "setl_300026D",
+      "utr": "1786300200y26",
       "status": "clean_match",
       "confidence": 100
     },
@@ -225,15 +222,8 @@
       "order_id": "order_200027P",
       "settlement_id": "setl_300027A",
       "utr": "1786041000x27",
-      "status": "duplicate",
-      "confidence": 95
-    },
-    {
-      "order_id": "order_200027P",
-      "settlement_id": "setl_500027DUP",
-      "utr": "1786041000x27",
-      "status": "duplicate",
-      "confidence": 95
+      "status": "clean_match",
+      "confidence": 100
     },
     {
       "order_id": "order_200028L",
@@ -250,9 +240,23 @@
       "confidence": 100
     },
     {
-      "order_id": "order_200031V",
-      "settlement_id": "setl_300031W",
-      "utr": "1787164200d31",
+      "order_id": "order_200030S",
+      "settlement_id": "setl_300030X",
+      "utr": "1787077800x30",
+      "status": "duplicate",
+      "confidence": 95
+    },
+    {
+      "order_id": "order_200030S",
+      "settlement_id": "setl_500030DUP",
+      "utr": "1787077800x30",
+      "status": "duplicate",
+      "confidence": 95
+    },
+    {
+      "order_id": "order_200031M",
+      "settlement_id": "setl_300031C",
+      "utr": "1787077800x31",
       "status": "clean_match",
       "confidence": 100
     },
@@ -274,29 +278,22 @@
       "order_id": "order_200034U",
       "settlement_id": "setl_300034Z",
       "utr": "1786905000b34",
+      "status": "timing_gap",
+      "confidence": 82
+    },
+    {
+      "order_id": "order_200035R",
+      "settlement_id": "setl_300035A",
+      "utr": "1785954600z35",
       "status": "clean_match",
       "confidence": 100
-    },
-    {
-      "order_id": "order_200035P",
-      "settlement_id": "setl_300035B",
-      "utr": "1786300200d35",
-      "status": "duplicate",
-      "confidence": 95
-    },
-    {
-      "order_id": "order_200035P",
-      "settlement_id": "setl_500035DUP",
-      "utr": "1786300200d35",
-      "status": "duplicate",
-      "confidence": 95
     },
     {
       "order_id": "order_200036U",
       "settlement_id": "setl_300036W",
       "utr": "1786991400y36",
-      "status": "clean_match",
-      "confidence": 100
+      "status": "fee_deduction_err",
+      "confidence": 99
     },
     {
       "order_id": "order_200037Q",
@@ -313,23 +310,23 @@
       "confidence": 100
     },
     {
-      "order_id": "order_200039U",
-      "settlement_id": "setl_300039D",
-      "utr": "1786213800a39",
+      "order_id": "order_200040M",
+      "settlement_id": "setl_300040C",
+      "utr": "1786213800a40",
       "status": "clean_match",
       "confidence": 100
     },
     {
-      "order_id": "order_200040Q",
-      "settlement_id": "setl_300040W",
-      "utr": "1785522600z40",
+      "order_id": "order_200041Q",
+      "settlement_id": "setl_300041Y",
+      "utr": "1786732200y41",
       "status": "clean_match",
       "confidence": 100
     },
     {
-      "order_id": "order_200041N",
-      "settlement_id": "setl_300041D",
-      "utr": "1786991400d41",
+      "order_id": "order_200042L",
+      "settlement_id": "setl_300042X",
+      "utr": "1785695400b42",
       "status": "clean_match",
       "confidence": 100
     },
@@ -365,76 +362,83 @@
       "order_id": "order_200047P",
       "settlement_id": "setl_300047A",
       "utr": "1785954600y47",
-      "status": "partial_payment",
-      "confidence": 90
-    },
-    {
-      "order_id": "order_200048T",
-      "settlement_id": "setl_300048Z",
-      "utr": "1786041000d48",
       "status": "clean_match",
       "confidence": 100
     },
     {
-      "order_id": "order_200049P",
+      "order_id": "order_200048L",
+      "settlement_id": "setl_300048D",
+      "utr": "1786127400z48",
+      "status": "clean_match",
+      "confidence": 100
+    },
+    {
+      "order_id": "order_200049Q",
       "settlement_id": "setl_300049Z",
-      "utr": "1785522600b49",
+      "utr": "1786127400y49",
       "status": "clean_match",
       "confidence": 100
     },
     {
-      "order_id": "order_200050Q",
-      "settlement_id": "setl_300050X",
-      "utr": "1786213800y50",
+      "order_id": "order_200050R",
+      "settlement_id": "setl_300050A",
+      "utr": "1785695400c50",
       "status": "clean_match",
       "confidence": 100
     },
     {
-      "order_id": "order_200051R",
-      "settlement_id": "setl_300051W",
-      "utr": "1785781800b51",
+      "order_id": "order_200051S",
+      "settlement_id": "setl_300051E",
+      "utr": "1786386600a51",
       "status": "clean_match",
       "confidence": 100
     },
     {
-      "order_id": "order_200053S",
-      "settlement_id": "setl_300053F",
-      "utr": "1786905000d53",
-      "status": "clean_match",
-      "confidence": 100
-    },
-    {
-      "order_id": "order_200054L",
-      "settlement_id": "setl_300054C",
-      "utr": "1785522600z54",
+      "order_id": "order_200052V",
+      "settlement_id": "setl_300052A",
+      "utr": "1785609000x52",
       "status": "fee_deduction_err",
-      "confidence": 90
+      "confidence": 99
     },
     {
-      "order_id": "order_200055R",
-      "settlement_id": "setl_300055F",
-      "utr": "1786386600z55",
+      "order_id": "order_200053R",
+      "settlement_id": "setl_300053C",
+      "utr": "1787164200a53",
       "status": "clean_match",
       "confidence": 100
     },
     {
-      "order_id": "order_200056U",
-      "settlement_id": "setl_300056A",
-      "utr": "1786645800d56",
+      "order_id": "order_200054P",
+      "settlement_id": "setl_300054A",
+      "utr": "1785609000d54",
       "status": "clean_match",
       "confidence": 100
     },
     {
-      "order_id": "order_200057N",
-      "settlement_id": "setl_300057Z",
-      "utr": "1786645800d57",
+      "order_id": "order_200055U",
+      "settlement_id": "setl_300055Z",
+      "utr": "1786473000a55",
       "status": "clean_match",
       "confidence": 100
     },
     {
-      "order_id": "order_200058V",
-      "settlement_id": "setl_300058A",
-      "utr": "1786559400z58",
+      "order_id": "order_200056R",
+      "settlement_id": "setl_300056X",
+      "utr": "1786300200c56",
+      "status": "clean_match",
+      "confidence": 100
+    },
+    {
+      "order_id": "order_200057S",
+      "settlement_id": "setl_300057A",
+      "utr": "1786991400b57",
+      "status": "clean_match",
+      "confidence": 100
+    },
+    {
+      "order_id": "order_200058N",
+      "settlement_id": "setl_300058F",
+      "utr": "1787077800d58",
       "status": "clean_match",
       "confidence": 100
     },
@@ -509,30 +513,30 @@
       "confidence": 100
     },
     {
-      "order_id": "order_200069U",
-      "settlement_id": "setl_300069D",
-      "utr": "1787250600c69",
+      "order_id": "order_200070T",
+      "settlement_id": "setl_300070X",
+      "utr": "1786300200c70",
       "status": "clean_match",
       "confidence": 100
     },
     {
-      "order_id": "order_200070Q",
-      "settlement_id": "setl_300070Z",
-      "utr": "1786213800c70",
+      "order_id": "order_200071U",
+      "settlement_id": "setl_300071X",
+      "utr": "1785868200b71",
       "status": "clean_match",
       "confidence": 100
     },
     {
-      "order_id": "order_200071N",
-      "settlement_id": "setl_300071Z",
-      "utr": "1786559400b71",
-      "status": "fee_deduction_err",
-      "confidence": 90
+      "order_id": "order_200072P",
+      "settlement_id": "setl_300072X",
+      "utr": "1786645800c72",
+      "status": "timing_gap",
+      "confidence": 75
     },
     {
-      "order_id": "order_200072R",
-      "settlement_id": "setl_300072E",
-      "utr": "1786732200a72",
+      "order_id": "order_200073P",
+      "settlement_id": "setl_300073C",
+      "utr": "1786559400x73",
       "status": "clean_match",
       "confidence": 100
     },
@@ -540,8 +544,8 @@
       "order_id": "order_200074S",
       "settlement_id": "setl_300074D",
       "utr": "1785522600c74",
-      "status": "timing_gap",
-      "confidence": 75
+      "status": "clean_match",
+      "confidence": 100
     },
     {
       "order_id": "order_200075U",
@@ -568,8 +572,8 @@
       "order_id": "order_200078V",
       "settlement_id": "setl_300078W",
       "utr": "1785695400d78",
-      "status": "clean_match",
-      "confidence": 100
+      "status": "tds_gst_mismatch",
+      "confidence": 99
     },
     {
       "order_id": "order_200079N",
@@ -586,28 +590,56 @@
       "confidence": 100
     },
     {
+      "order_id": "order_200081M",
+      "settlement_id": "setl_300081D",
+      "utr": "1785522600x81",
+      "status": "clean_match",
+      "confidence": 100
+    },
+    {
+      "order_id": "order_200082P",
+      "settlement_id": "setl_300082X",
+      "utr": "1787250600z82",
+      "status": "partial_payment",
+      "confidence": 92
+    },
+    {
+      "order_id": "order_200083P",
+      "settlement_id": "setl_300083W",
+      "utr": "1787164200b83",
+      "status": "clean_match",
+      "confidence": 100
+    },
+    {
+      "order_id": "order_200084M",
+      "settlement_id": "setl_300084F",
+      "utr": "1786041000y84",
+      "status": "partial_payment",
+      "confidence": 99
+    },
+    {
       "order_id": null,
       "settlement_id": null,
-      "utr": "1787077800orphan30",
+      "utr": "1786041000orphan8",
       "status": "phantom_bank",
       "confidence": 50
     },
     {
       "order_id": null,
       "settlement_id": null,
-      "utr": "1785522600orphan73",
+      "utr": "1786559400orphan25",
       "status": "phantom_bank",
       "confidence": 50
     },
     {
-      "order_id": "order_200042M",
+      "order_id": "order_200039U",
       "settlement_id": null,
       "utr": null,
       "status": "phantom_ledger",
       "confidence": 50
     },
     {
-      "order_id": "order_200052M",
+      "order_id": "order_200069U",
       "settlement_id": null,
       "utr": null,
       "status": "phantom_ledger",

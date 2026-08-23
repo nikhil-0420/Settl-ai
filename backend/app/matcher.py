@@ -6,6 +6,7 @@ DATA_DIR = Path(__file__).parent.parent / "data"
 AMOUNT_TOLERANCE = 5000          # paise (~₹50) — treat as "close enough" before flagging
 FEE_TOLERANCE = 100              # paise (~₹1) — fee/tax is arithmetic, should be exact
 DATE_WINDOW_DAYS = 12             # beyond T+2 norm, still "timing_gap" not "unmatched"
+TDS_TOLERANCE = 100              # paise (~₹1) — TDS is arithmetic, should be exact
 
 def load_data():
     settlement = pd.read_csv(DATA_DIR / "settlement_report.csv", parse_dates=["settled_at"])
@@ -24,6 +25,11 @@ def classify_settlement_row(row, bank_by_utr, ledger_by_order):
     fee_tax_diff = abs((row["fee"] + row["tax"]) - (expected_fee + expected_tax))
     if fee_tax_diff >   FEE_TOLERANCE:
         return "fee_deduction_err"
+    
+    expected_tds = round(row["amount"] * 0.01)
+    tds_diff = abs(row["tds"] - expected_tds)
+    if tds_diff > TDS_TOLERANCE:
+        return "tds_gst_mismatch"
 
     amount_diff = abs(bank_row["credit_amount"] - row["net_amount"])
     day_gap = (bank_row["value_date"] - row["settled_at"]).days

@@ -1,5 +1,5 @@
 """
-Settl.ai — synthetic data generator
+Settl.ai - synthetic data generator
 
 Produces three sources that mimic real Razorpay-style reconciliation inputs:
   1. settlement_report.csv  -- Razorpay settlement lines (real field names:
@@ -20,19 +20,30 @@ Run: python generate_data.py
 Outputs land in backend/data/
 """
 
+from collections import defaultdict
 import csv
 import json
 import random
 from datetime import datetime, timedelta
+from pathlib import Path
+from collections import defaultdict
 
 random.seed(42)  # reproducible — needed so ground truth stays valid across reruns
 
 N_RECORDS = 85
-OUT_DIR = "../data"
+OUT_DIR = Path(__file__).parent.parent / "data"
 
 METHODS = ["card", "upi", "netbanking", "wallet"]
 BASE_DATE = datetime(2026, 8, 1)
 
+# Deterministic severity tiers (just-over-tolerance / moderate / severe) instead of
+# pure random draws — guarantees real spread across only 3 seeded instances per type,
+# rather than leaving it to chance whether random.uniform() explores the low end.
+SEVERITY_LEVELS = {
+    "partial_payment": [0.12, 0.25, 0.45],       # fraction of net amount withheld
+    "fee_deduction_err": [0.023, 0.032, 0.05],   # wrong fee rate (correct is 0.02)
+    "tds_gst_mismatch": [0.013, 0.018, 0.03],    # wrong TDS rate (correct is 0.01)
+}
 
 def rand_amount():
     # amounts in paise, like Razorpay's real API (smallest currency unit)
@@ -47,13 +58,14 @@ def gen_ids(i):
     }
 
 
-def make_record(i, mismatch_type):
+def make_record(i, mismatch_type, severity_idx=0):
     ids = gen_ids(i)
     created = BASE_DATE + timedelta(days=random.randint(0, 20))
     gross = rand_amount()
     fee = round(gross * 0.02)          # Razorpay MDR ~2%
     tax = round(fee * 0.18)            # 18% GST on the fee
-    net = gross - fee - tax
+    tds = round(gross * 0.01)          # 1% TDS under Sec 194-O
+    net = gross - fee - tax - tds
     utr = f"{int(created.timestamp())}{random.choice('abcdxyz')}{i}"
     method = random.choice(METHODS)
 
@@ -64,6 +76,7 @@ def make_record(i, mismatch_type):
         "amount": gross,
         "fee": fee,
         "tax": tax,
+        "tds": tds,
         "net_amount": net,
         "settled_at": created.strftime("%Y-%m-%d"),
         "utr": utr,
@@ -93,17 +106,28 @@ def make_record(i, mismatch_type):
         reason = "timing_gap"
 
     elif mismatch_type == "partial_payment":
-        shortfall = round(net * random.uniform(0.2, 0.5))
+        frac = SEVERITY_LEVELS["partial_payment"][severity_idx % 3]
+        shortfall = round(net * frac)
         bank_row["credit_amount"] = net - shortfall
         reason = "partial_payment"
 
     elif mismatch_type == "fee_deduction_err":
         # settlement report shows a fee that doesn't match the standard 2%+18% GST calc
-        wrong_fee = round(gross * random.uniform(0.03, 0.05))
+        rate = SEVERITY_LEVELS["fee_deduction_err"][severity_idx % 3]
+        wrong_fee = round(gross * rate)
         settlement_row["fee"] = wrong_fee
-        settlement_row["net_amount"] = gross - wrong_fee - tax
+        settlement_row["net_amount"] = gross - wrong_fee - tax - tds
         bank_row["credit_amount"] = settlement_row["net_amount"]
         reason = "fee_deduction_err"
+
+    elif mismatch_type == "tds_gst_mismatch":
+        # settlement report's TDS deduction doesn't match the expected 1% calc
+        rate = SEVERITY_LEVELS["tds_gst_mismatch"][severity_idx % 3]
+        wrong_tds = round(gross * rate)
+        settlement_row["tds"] = wrong_tds
+        settlement_row["net_amount"] = gross - fee - tax - wrong_tds
+        bank_row["credit_amount"] = settlement_row["net_amount"]
+        reason = "tds_gst_mismatch"
 
     elif mismatch_type == "duplicate":
         reason = "duplicate"  # handled by caller (emits the row twice)
@@ -129,15 +153,17 @@ def main():
         ["timing_gap"] * 3
         + ["partial_payment"] * 3
         + ["fee_deduction_err"] * 3
+        + ["tds_gst_mismatch"] * 3
         + ["duplicate"] * 2
         + ["phantom_bank"] * 2
         + ["phantom_ledger"] * 2
     )
     random.shuffle(mismatch_types)
-    mismatch_types = mismatch_types[:n_mismatch]
+    n_mismatch = len(mismatch_types)
     plan = ["clean"] * (N_RECORDS - n_mismatch) + mismatch_types
     random.shuffle(plan)
 
+    severity_counters = defaultdict(int)
     for i, mtype in enumerate(plan):
         if mtype == "phantom_bank":
             # only a bank row, no settlement/ledger
@@ -167,7 +193,9 @@ def main():
             ground_truth[ids["order_id"]] = {"type": "phantom_ledger", "order_id": ids["order_id"]}
             continue
 
-        settlement_row, bank_row, ledger_row, reason, ids = make_record(i, mtype if mtype != "clean" else None)
+        sev_idx = severity_counters[mtype]
+        severity_counters[mtype] += 1
+        settlement_row, bank_row, ledger_row, reason, ids = make_record(i, mtype if mtype != "clean" else None, sev_idx)
         settlement_rows.append(settlement_row)
         bank_rows.append(bank_row)
         ledger_rows.append(ledger_row)
@@ -184,22 +212,22 @@ def main():
             "utr": bank_row["utr"],
         }
 
-    with open(f"{OUT_DIR}/settlement_report.csv", "w", newline="") as f:
+    with open(OUT_DIR / "settlement_report.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(settlement_rows[0].keys()))
         w.writeheader()
         w.writerows(settlement_rows)
 
-    with open(f"{OUT_DIR}/bank_statement.csv", "w", newline="") as f:
+    with open(OUT_DIR / "bank_statement.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(bank_rows[0].keys()))
         w.writeheader()
         w.writerows(bank_rows)
 
-    with open(f"{OUT_DIR}/internal_ledger.csv", "w", newline="") as f:
+    with open(OUT_DIR / "internal_ledger.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(ledger_rows[0].keys()))
         w.writeheader()
         w.writerows(ledger_rows)
 
-    with open(f"{OUT_DIR}/ground_truth.json", "w") as f:
+    with open(OUT_DIR / "ground_truth.json", "w") as f:
         json.dump(ground_truth, f, indent=2)
 
     print(f"settlement_report.csv : {len(settlement_rows)} rows")
