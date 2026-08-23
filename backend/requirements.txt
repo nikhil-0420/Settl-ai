@@ -5,3 +5,4 @@ rapidfuzz
 sentence-transformers
 chromadb
 python-multipart
+pytest
