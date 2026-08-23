@@ -1,3 +1,15 @@
+"""
+Settl.ai matching engine.
+
+3-pass deterministic classification against the synthetic 3-source dataset:
+exact fee/TDS arithmetic checks (independent of amount matching — see broke-
+log bug #2), amount-tolerance fuzzy pass, then date-window pass. Self-grades
+against ground_truth.json for exact, defensible accuracy — not estimated.
+
+Run: python matcher.py
+
+"""
+
 import pandas as pd
 import json
 from pathlib import Path

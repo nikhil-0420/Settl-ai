@@ -1,4 +1,18 @@
-# backend/app/main.py
+"""
+Settl.ai FastAPI backend.
+
+Endpoints:
+  GET /              -> health check
+  GET /match-summary -> total records, match rate, per-status breakdown
+  GET /records       -> all records, optionally filtered by ?status=
+  GET /records/{order_id} -> 3-way source comparison (settlement/bank/ledger)
+                              for a single order
+
+Reads from reconciliation_summary.json (pre-computed by classifier.py) for
+list/summary views, and from the raw CSVs directly for the record-detail
+3-way comparison.
+
+"""
 import json
 from pathlib import Path
 

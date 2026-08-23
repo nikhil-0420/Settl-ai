@@ -1,3 +1,16 @@
+"""
+Settl.ai exception classifier + confidence scoring.
+
+Assigns a per-record confidence score (not a fixed constant per status) —
+confidence reflects how far a record sits from its tolerance boundary, so a
+borderline classification scores lower than an unambiguous one. Deterministic
+severity tiers in generate_data.py guarantee real score variance across the
+small seeded sample (see broke-log bug #5).
+
+Run: python classifier.py — writes reconciliation_summary.json
+
+"""
+
 import json
 from collections import defaultdict
 from pathlib import Path
