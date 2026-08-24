@@ -1,0 +1,1247 @@
+[
+  {
+    "id": "single_order_200007L",
+    "type": "single_order",
+    "question": "Why didn't order_200007L reconcile cleanly?",
+    "answer": "Order [order_200007L] did not reconcile cleanly because it has a status of duplicate, meaning this settlement entry appears more than once for the same order.",
+    "cited_ids": [
+      "order_200007L"
+    ],
+    "expected_ids": [
+      "order_200007L"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200011L",
+    "type": "single_order",
+    "question": "What's the issue with order_200011L?",
+    "answer": "Order [order_200011L] has a tds_gst_mismatch status because the TDS deduction does not match the expected 1% calculation.",
+    "cited_ids": [
+      "order_200011L"
+    ],
+    "expected_ids": [
+      "order_200011L"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200017M",
+    "type": "single_order",
+    "question": "Explain the reconciliation status of order_200017M.",
+    "answer": "Order [order_200017M] has a status of timing_gap with a confidence score of 78. This occurred because the bank credit arrived later than the normal T+2 settlement window.",
+    "cited_ids": [
+      "order_200017M"
+    ],
+    "expected_ids": [
+      "order_200017M"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200022T",
+    "type": "single_order",
+    "question": "Why didn't order_200022T reconcile cleanly?",
+    "answer": "Order [order_200022T] has a status of partial_payment because the bank credited less than the expected settlement amount.",
+    "cited_ids": [
+      "order_200022T"
+    ],
+    "expected_ids": [
+      "order_200022T"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200007L_t0",
+    "type": "single_order",
+    "question": "Why didn't order_200007L reconcile cleanly?",
+    "answer": "Order [order_200007L] did not reconcile cleanly because it has a status of duplicate, as this settlement entry appears more than once for the same order.",
+    "cited_ids": [
+      "order_200007L"
+    ],
+    "expected_ids": [
+      "order_200007L"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200007L_t1",
+    "type": "single_order",
+    "question": "What's the issue with order_200007L?",
+    "answer": "Order [order_200007L] has a status of duplicate because this settlement entry appears more than once for the same order, specifically under settlement setl_300007A and setl_500007DUP.",
+    "cited_ids": [
+      "order_200007L"
+    ],
+    "expected_ids": [
+      "order_200007L"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200007L_t2",
+    "type": "single_order",
+    "question": "Explain the reconciliation status of order_200007L.",
+    "answer": "Order [order_200007L] has a duplicate status with a confidence level of 95 because the settlement entry appears more than once for the same order.",
+    "cited_ids": [
+      "order_200007L"
+    ],
+    "expected_ids": [
+      "order_200007L"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200011L_t0",
+    "type": "single_order",
+    "question": "Why didn't order_200011L reconcile cleanly?",
+    "answer": "Order [order_200011L] did not reconcile cleanly because the TDS deduction does not match the expected 1% calculation. Consequently, it has a status of tds_gst_mismatch with a confidence score of 77.",
+    "cited_ids": [
+      "order_200011L"
+    ],
+    "expected_ids": [
+      "order_200011L"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200011L_t1",
+    "type": "single_order",
+    "question": "What's the issue with order_200011L?",
+    "answer": "The issue with order [order_200011L] is that the TDS deduction does not match the expected 1% calculation, resulting in a tds_gst_mismatch status.",
+    "cited_ids": [
+      "order_200011L"
+    ],
+    "expected_ids": [
+      "order_200011L"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200011L_t2",
+    "type": "single_order",
+    "question": "Explain the reconciliation status of order_200011L.",
+    "answer": "Order [order_200011L] has a status of tds_gst_mismatch with a confidence of 77. This occurred because the TDS deduction does not match the expected 1% calculation.",
+    "cited_ids": [
+      "order_200011L"
+    ],
+    "expected_ids": [
+      "order_200011L"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200017M_t0",
+    "type": "single_order",
+    "question": "Why didn't order_200017M reconcile cleanly?",
+    "answer": "Order [order_200017M] did not reconcile cleanly because the bank credit arrived later than the normal T+2 settlement window, resulting in a timing gap status.",
+    "cited_ids": [
+      "order_200017M"
+    ],
+    "expected_ids": [
+      "order_200017M"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200017M_t1",
+    "type": "single_order",
+    "question": "What's the issue with order_200017M?",
+    "answer": "Order [order_200017M] has a status of timing_gap because the bank credit arrived later than the normal T+2 settlement window.",
+    "cited_ids": [
+      "order_200017M"
+    ],
+    "expected_ids": [
+      "order_200017M"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200017M_t2",
+    "type": "single_order",
+    "question": "Explain the reconciliation status of order_200017M.",
+    "answer": "Order [order_200017M] has a status of timing_gap with a confidence score of 78. This occurred because the bank credit arrived later than the normal T+2 settlement window.",
+    "cited_ids": [
+      "order_200017M"
+    ],
+    "expected_ids": [
+      "order_200017M"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200022T_t0",
+    "type": "single_order",
+    "question": "Why didn't order_200022T reconcile cleanly?",
+    "answer": "Order [order_200022T] has a partial_payment status because the bank credited less than the expected settlement amount.",
+    "cited_ids": [
+      "order_200022T"
+    ],
+    "expected_ids": [
+      "order_200022T"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200022T_t1",
+    "type": "single_order",
+    "question": "What's the issue with order_200022T?",
+    "answer": "Order [order_200022T] has a status of partial_payment because the bank credited less than the expected settlement amount.",
+    "cited_ids": [
+      "order_200022T"
+    ],
+    "expected_ids": [
+      "order_200022T"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200022T_t2",
+    "type": "single_order",
+    "question": "Explain the reconciliation status of order_200022T.",
+    "answer": "Order [order_200022T] has a status of partial_payment with a confidence score of 91 because the bank credited less than the expected settlement amount.",
+    "cited_ids": [
+      "order_200022T"
+    ],
+    "expected_ids": [
+      "order_200022T"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200023M_t0",
+    "type": "single_order",
+    "question": "Why didn't order_200023M reconcile cleanly?",
+    "answer": "Order [order_200023M] did not reconcile cleanly because the settlement fee does not match the standard 2% plus GST calculation.",
+    "cited_ids": [
+      "order_200023M"
+    ],
+    "expected_ids": [
+      "order_200023M"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200023M_t1",
+    "type": "single_order",
+    "question": "What's the issue with order_200023M?",
+    "answer": "Order [order_200023M] has a status of fee_deduction_err because the settlement fee does not match the standard 2% plus GST calculation.",
+    "cited_ids": [
+      "order_200023M"
+    ],
+    "expected_ids": [
+      "order_200023M"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200023M_t2",
+    "type": "single_order",
+    "question": "Explain the reconciliation status of order_200023M.",
+    "answer": "Order [order_200023M] has a status of fee_deduction_err with a confidence score of 79. This is because the settlement fee does not match the standard 2% plus GST calculation.",
+    "cited_ids": [
+      "order_200023M"
+    ],
+    "expected_ids": [
+      "order_200023M"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200024P_t0",
+    "type": "single_order",
+    "question": "Why didn't order_200024P reconcile cleanly?",
+    "answer": "Order [order_200024P] did not reconcile cleanly because the TDS deduction does not match the expected 1% calculation.",
+    "cited_ids": [
+      "order_200024P"
+    ],
+    "expected_ids": [
+      "order_200024P"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200024P_t1",
+    "type": "single_order",
+    "question": "What's the issue with order_200024P?",
+    "answer": "Order [order_200024P] has a status of tds_gst_mismatch because the TDS deduction does not match the expected 1% calculation.",
+    "cited_ids": [
+      "order_200024P"
+    ],
+    "expected_ids": [
+      "order_200024P"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200024P_t2",
+    "type": "single_order",
+    "question": "Explain the reconciliation status of order_200024P.",
+    "answer": "Order [order_200024P] has a status of tds_gst_mismatch with a confidence level of 99. This occurred because the TDS deduction does not match the expected 1% calculation.",
+    "cited_ids": [
+      "order_200024P"
+    ],
+    "expected_ids": [
+      "order_200024P"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200030S_t0",
+    "type": "single_order",
+    "question": "Why didn't order_200030S reconcile cleanly?",
+    "answer": "Order [order_200030S] did not reconcile cleanly because it has a duplicate status with a confidence of 95. This settlement entry appears more than once for the same order under settlement IDs [setl_300030X] and [setl_500030DUP].",
+    "cited_ids": [
+      "order_200030S",
+      "setl_500030DUP",
+      "setl_300030X"
+    ],
+    "expected_ids": [
+      "order_200030S"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": false,
+    "claim_correct": false
+  },
+  {
+    "id": "single_order_200030S_t1",
+    "type": "single_order",
+    "question": "What's the issue with order_200030S?",
+    "answer": "[order_200030S] has a status of duplicate because this settlement entry appears more than once for the same order across settlement entries [setl_300030X] and [setl_500030DUP].",
+    "cited_ids": [
+      "order_200030S",
+      "setl_500030DUP",
+      "setl_300030X"
+    ],
+    "expected_ids": [
+      "order_200030S"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": false,
+    "claim_correct": false
+  },
+  {
+    "id": "single_order_200030S_t2",
+    "type": "single_order",
+    "question": "Explain the reconciliation status of order_200030S.",
+    "answer": "Order [order_200030S] has a duplicate status with a confidence of 95 because this settlement entry appears more than once for the same order. It is associated with settlement entries [setl_300030X] and [setl_500030DUP] under UTR 1787077800x30.",
+    "cited_ids": [
+      "order_200030S",
+      "setl_500030DUP",
+      "setl_300030X"
+    ],
+    "expected_ids": [
+      "order_200030S"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": false,
+    "claim_correct": false
+  },
+  {
+    "id": "single_order_200034U_t0",
+    "type": "single_order",
+    "question": "Why didn't order_200034U reconcile cleanly?",
+    "answer": "Order [order_200034U] experienced a timing gap because the bank credit arrived later than the normal T+2 settlement window.",
+    "cited_ids": [
+      "order_200034U"
+    ],
+    "expected_ids": [
+      "order_200034U"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200034U_t1",
+    "type": "single_order",
+    "question": "What's the issue with order_200034U?",
+    "answer": "Order [order_200034U] has a timing gap status because the bank credit arrived later than the normal T+2 settlement window.",
+    "cited_ids": [
+      "order_200034U"
+    ],
+    "expected_ids": [
+      "order_200034U"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200034U_t2",
+    "type": "single_order",
+    "question": "Explain the reconciliation status of order_200034U.",
+    "answer": "Order [order_200034U] has a status of timing_gap with an 82 confidence score. This occurred because the bank credit arrived later than the normal T+2 settlement window.",
+    "cited_ids": [
+      "order_200034U"
+    ],
+    "expected_ids": [
+      "order_200034U"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200036U_t0",
+    "type": "single_order",
+    "question": "Why didn't order_200036U reconcile cleanly?",
+    "answer": "Order [order_200036U] did not reconcile cleanly because the settlement fee does not match the standard 2% plus GST calculation.",
+    "cited_ids": [
+      "order_200036U"
+    ],
+    "expected_ids": [
+      "order_200036U"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200036U_t1",
+    "type": "single_order",
+    "question": "What's the issue with order_200036U?",
+    "answer": "Order [order_200036U] has a fee_deduction_err status because the settlement fee does not match the standard 2% plus GST calculation.",
+    "cited_ids": [
+      "order_200036U"
+    ],
+    "expected_ids": [
+      "order_200036U"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200036U_t2",
+    "type": "single_order",
+    "question": "Explain the reconciliation status of order_200036U.",
+    "answer": "Order [order_200036U] has a status of fee_deduction_err because the settlement fee does not match the standard 2% plus GST calculation.",
+    "cited_ids": [
+      "order_200036U"
+    ],
+    "expected_ids": [
+      "order_200036U"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200052V_t0",
+    "type": "single_order",
+    "question": "Why didn't order_200052V reconcile cleanly?",
+    "answer": "Order [order_200052V] did not reconcile cleanly because the settlement fee does not match the standard 2% plus GST calculation.",
+    "cited_ids": [
+      "order_200052V"
+    ],
+    "expected_ids": [
+      "order_200052V"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200052V_t1",
+    "type": "single_order",
+    "question": "What's the issue with order_200052V?",
+    "answer": "Order [order_200052V] has a status of fee_deduction_err because the settlement fee does not match the standard 2% plus GST calculation.",
+    "cited_ids": [
+      "order_200052V"
+    ],
+    "expected_ids": [
+      "order_200052V"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200052V_t2",
+    "type": "single_order",
+    "question": "Explain the reconciliation status of order_200052V.",
+    "answer": "Order [order_200052V] has a status of fee_deduction_err with a confidence score of 99. Its settlement fee does not match the standard 2% plus GST calculation.",
+    "cited_ids": [
+      "order_200052V"
+    ],
+    "expected_ids": [
+      "order_200052V"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200072P_t0",
+    "type": "single_order",
+    "question": "Why didn't order_200072P reconcile cleanly?",
+    "answer": "Order [order_200072P] has a timing_gap status because the bank credit arrived later than the normal T+2 settlement window.",
+    "cited_ids": [
+      "order_200072P"
+    ],
+    "expected_ids": [
+      "order_200072P"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200072P_t1",
+    "type": "single_order",
+    "question": "What's the issue with order_200072P?",
+    "answer": "Order [order_200072P] has a timing gap status because the bank credit arrived later than the normal T+2 settlement window.",
+    "cited_ids": [
+      "order_200072P"
+    ],
+    "expected_ids": [
+      "order_200072P"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200072P_t2",
+    "type": "single_order",
+    "question": "Explain the reconciliation status of order_200072P.",
+    "answer": "Order [order_200072P] has a timing_gap status with a confidence score of 75. This occurred because the bank credit arrived later than the normal T+2 settlement window.",
+    "cited_ids": [
+      "order_200072P"
+    ],
+    "expected_ids": [
+      "order_200072P"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200078V_t0",
+    "type": "single_order",
+    "question": "Why didn't order_200078V reconcile cleanly?",
+    "answer": "Order [order_200078V] did not reconcile cleanly because the TDS deduction does not match the expected 1% calculation.",
+    "cited_ids": [
+      "order_200078V"
+    ],
+    "expected_ids": [
+      "order_200078V"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200078V_t1",
+    "type": "single_order",
+    "question": "What's the issue with order_200078V?",
+    "answer": "Order [order_200078V] has a status of tds_gst_mismatch because the TDS deduction does not match the expected 1% calculation.",
+    "cited_ids": [
+      "order_200078V"
+    ],
+    "expected_ids": [
+      "order_200078V"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200078V_t2",
+    "type": "single_order",
+    "question": "Explain the reconciliation status of order_200078V.",
+    "answer": "Order [order_200078V] has a status of tds_gst_mismatch with a confidence of 99. This occurred because the TDS deduction does not match the expected 1% calculation.",
+    "cited_ids": [
+      "order_200078V"
+    ],
+    "expected_ids": [
+      "order_200078V"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200082P_t0",
+    "type": "single_order",
+    "question": "Why didn't order_200082P reconcile cleanly?",
+    "answer": "Order [order_200082P] did not reconcile cleanly because it has a status of partial_payment. The bank credited less than the expected settlement amount [order_200082P].",
+    "cited_ids": [
+      "order_200082P"
+    ],
+    "expected_ids": [
+      "order_200082P"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200082P_t1",
+    "type": "single_order",
+    "question": "What's the issue with order_200082P?",
+    "answer": "Order [order_200082P] has a status of partial_payment because the bank credited less than the expected settlement amount, resulting in a confidence score of 92.",
+    "cited_ids": [
+      "order_200082P"
+    ],
+    "expected_ids": [
+      "order_200082P"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200082P_t2",
+    "type": "single_order",
+    "question": "Explain the reconciliation status of order_200082P.",
+    "answer": "Order [order_200082P] has a status of partial_payment with a confidence of 92. It experienced this issue because the bank credited less than the expected settlement amount.",
+    "cited_ids": [
+      "order_200082P"
+    ],
+    "expected_ids": [
+      "order_200082P"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200084M_t0",
+    "type": "single_order",
+    "question": "Why didn't order_200084M reconcile cleanly?",
+    "answer": "Order [order_200084M] has a status of partial_payment because the bank credited less than the expected settlement amount.",
+    "cited_ids": [
+      "order_200084M"
+    ],
+    "expected_ids": [
+      "order_200084M"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200084M_t1",
+    "type": "single_order",
+    "question": "What's the issue with order_200084M?",
+    "answer": "Order [order_200084M] has a status of partial_payment because the bank credited less than the expected settlement amount.",
+    "cited_ids": [
+      "order_200084M"
+    ],
+    "expected_ids": [
+      "order_200084M"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200084M_t2",
+    "type": "single_order",
+    "question": "Explain the reconciliation status of order_200084M.",
+    "answer": "Order [order_200084M] has a status of partial_payment with a confidence of 99 because the bank credited less than the expected settlement amount.",
+    "cited_ids": [
+      "order_200084M"
+    ],
+    "expected_ids": [
+      "order_200084M"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200039U_t0",
+    "type": "single_order",
+    "question": "Why didn't order_200039U reconcile cleanly?",
+    "answer": "Order [order_200039U] has a status of phantom_ledger with a confidence of 50 because a ledger invoice exists with no matching settlement record.",
+    "cited_ids": [
+      "order_200039U"
+    ],
+    "expected_ids": [
+      "order_200039U"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200039U_t1",
+    "type": "single_order",
+    "question": "What's the issue with order_200039U?",
+    "answer": "Order [order_200039U] has a status of phantom_ledger with a confidence of 50 because a ledger invoice exists with no matching settlement record.",
+    "cited_ids": [
+      "order_200039U"
+    ],
+    "expected_ids": [
+      "order_200039U"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200039U_t2",
+    "type": "single_order",
+    "question": "Explain the reconciliation status of order_200039U.",
+    "answer": "Order [order_200039U] has a status of phantom_ledger with a confidence of 50. It shows a ledger invoice exists with no matching settlement record.",
+    "cited_ids": [
+      "order_200039U"
+    ],
+    "expected_ids": [
+      "order_200039U"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200069U_t0",
+    "type": "single_order",
+    "question": "Why didn't order_200069U reconcile cleanly?",
+    "answer": "Order [order_200069U] has a status of phantom_ledger with a confidence of 50 because a ledger invoice exists with no matching settlement record.",
+    "cited_ids": [
+      "order_200069U"
+    ],
+    "expected_ids": [
+      "order_200069U"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200069U_t1",
+    "type": "single_order",
+    "question": "What's the issue with order_200069U?",
+    "answer": "Order [order_200069U] has a status of phantom_ledger with a confidence of 50 because a ledger invoice exists with no matching settlement record.",
+    "cited_ids": [
+      "order_200069U"
+    ],
+    "expected_ids": [
+      "order_200069U"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "single_order_200069U_t2",
+    "type": "single_order",
+    "question": "Explain the reconciliation status of order_200069U.",
+    "answer": "Order [order_200069U] has a status of phantom_ledger with a confidence of 50. This is because a ledger invoice exists with no matching settlement record.",
+    "cited_ids": [
+      "order_200069U"
+    ],
+    "expected_ids": [
+      "order_200069U"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true
+  },
+  {
+    "id": "set_fee_deduction_err_0",
+    "type": "set_based",
+    "question": "Which orders have fee deduction errors?",
+    "answer": "Orders [order_200036U], [order_200023M], and [order_200052V] have fee deduction errors because their settlement fees do not match the standard 2% plus GST calculation.",
+    "cited_ids": [
+      "order_200023M",
+      "order_200036U",
+      "order_200052V"
+    ],
+    "expected_ids": [
+      "order_200023M",
+      "order_200036U",
+      "order_200052V"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true,
+    "precision": 1.0,
+    "recall": 1.0
+  },
+  {
+    "id": "set_fee_deduction_err_1",
+    "type": "set_based",
+    "question": "List orders with incorrect settlement fees.",
+    "answer": "Orders [order_200036U], [order_200023M], and [order_200052V] all have incorrect settlement fees because their settlement fees do not match the standard 2% plus GST calculation.",
+    "cited_ids": [
+      "order_200023M",
+      "order_200036U",
+      "order_200052V"
+    ],
+    "expected_ids": [
+      "order_200023M",
+      "order_200036U",
+      "order_200052V"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true,
+    "precision": 1.0,
+    "recall": 1.0
+  },
+  {
+    "id": "set_tds_gst_mismatch_0",
+    "type": "set_based",
+    "question": "Which orders have TDS mismatches?",
+    "answer": "Orders [order_200011L], [order_200078V], and [order_200024P] all have TDS mismatches because their TDS deductions do not match the expected 1% calculation.",
+    "cited_ids": [
+      "order_200011L",
+      "order_200024P",
+      "order_200078V"
+    ],
+    "expected_ids": [
+      "order_200011L",
+      "order_200024P",
+      "order_200078V"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true,
+    "precision": 1.0,
+    "recall": 1.0
+  },
+  {
+    "id": "set_tds_gst_mismatch_1",
+    "type": "set_based",
+    "question": "List orders with incorrect TDS deductions.",
+    "answer": "Orders [order_200078V], [order_200011L], and [order_200024P] have incorrect TDS deductions because their TDS deductions do not match the expected 1% calculation.",
+    "cited_ids": [
+      "order_200011L",
+      "order_200024P",
+      "order_200078V"
+    ],
+    "expected_ids": [
+      "order_200011L",
+      "order_200024P",
+      "order_200078V"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true,
+    "precision": 1.0,
+    "recall": 1.0
+  },
+  {
+    "id": "set_timing_gap_0",
+    "type": "set_based",
+    "question": "Which orders had a timing gap in settlement?",
+    "answer": "Orders [order_200017M], [order_200072P], and [order_200034U] all experienced a timing gap because their bank credit arrived later than the normal T+2 settlement window.",
+    "cited_ids": [
+      "order_200034U",
+      "order_200072P",
+      "order_200017M"
+    ],
+    "expected_ids": [
+      "order_200017M",
+      "order_200034U",
+      "order_200072P"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true,
+    "precision": 1.0,
+    "recall": 1.0
+  },
+  {
+    "id": "set_timing_gap_1",
+    "type": "set_based",
+    "question": "List orders that settled late.",
+    "answer": "Orders [order_200034U], [order_200017M], and [order_200072P] all experienced timing gaps because their bank credit arrived later than the normal T+2 settlement window.",
+    "cited_ids": [
+      "order_200034U",
+      "order_200072P",
+      "order_200017M"
+    ],
+    "expected_ids": [
+      "order_200017M",
+      "order_200034U",
+      "order_200072P"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true,
+    "precision": 1.0,
+    "recall": 1.0
+  },
+  {
+    "id": "set_partial_payment_0",
+    "type": "set_based",
+    "question": "Which orders were only partially paid?",
+    "answer": "Orders [order_200082P], [order_200022T], and [order_200084M] were only partially paid because the bank credited less than the expected settlement amount.",
+    "cited_ids": [
+      "order_200082P",
+      "order_200022T",
+      "order_200084M"
+    ],
+    "expected_ids": [
+      "order_200022T",
+      "order_200082P",
+      "order_200084M"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true,
+    "precision": 1.0,
+    "recall": 1.0
+  },
+  {
+    "id": "set_partial_payment_1",
+    "type": "set_based",
+    "question": "List orders with a payment shortfall.",
+    "answer": "Orders [order_200084M], [order_200082P], and [order_200022T] all have a payment shortfall because the bank credited less than the expected settlement amount, resulting in a partial_payment status.",
+    "cited_ids": [
+      "order_200022T",
+      "order_200082P",
+      "order_200084M"
+    ],
+    "expected_ids": [
+      "order_200022T",
+      "order_200082P",
+      "order_200084M"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true,
+    "precision": 1.0,
+    "recall": 1.0
+  },
+  {
+    "id": "set_duplicate_0",
+    "type": "set_based",
+    "question": "Which orders were settled more than once?",
+    "answer": "[order_200007L] appears as a duplicate settlement entry because this settlement entry appears more than once for the same order.",
+    "cited_ids": [
+      "order_200007L"
+    ],
+    "expected_ids": [
+      "order_200007L",
+      "order_200030S"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true,
+    "precision": 1.0,
+    "recall": 0.5
+  },
+  {
+    "id": "set_phantom_ledger_0",
+    "type": "set_based",
+    "question": "Which orders have a ledger entry with no matching settlement?",
+    "answer": "[order_200069U] and [order_200039U] both have a ledger invoice that exists with no matching settlement record.",
+    "cited_ids": [
+      "order_200069U",
+      "order_200039U"
+    ],
+    "expected_ids": [
+      "order_200039U",
+      "order_200069U"
+    ],
+    "is_refusal": false,
+    "expect_refusal": false,
+    "refusal_correct": true,
+    "id_correct": true,
+    "claim_correct": true,
+    "precision": 1.0,
+    "recall": 1.0
+  },
+  {
+    "id": "unanswerable_0",
+    "type": "unanswerable",
+    "question": "What's the capital of France?",
+    "answer": "I don't have enough information to answer that confidently.",
+    "cited_ids": [],
+    "expected_ids": [],
+    "is_refusal": true,
+    "expect_refusal": true,
+    "refusal_correct": true,
+    "id_correct": null,
+    "claim_correct": null
+  },
+  {
+    "id": "unanswerable_1",
+    "type": "unanswerable",
+    "question": "What was Settl.ai's revenue last quarter?",
+    "answer": "I don't have enough information to answer that confidently.",
+    "cited_ids": [],
+    "expected_ids": [],
+    "is_refusal": true,
+    "expect_refusal": true,
+    "refusal_correct": true,
+    "id_correct": null,
+    "claim_correct": null
+  },
+  {
+    "id": "unanswerable_2",
+    "type": "unanswerable",
+    "question": "Who is the CEO of Razorpay?",
+    "answer": "I don't have enough information to answer that confidently.",
+    "cited_ids": [],
+    "expected_ids": [],
+    "is_refusal": true,
+    "expect_refusal": true,
+    "refusal_correct": true,
+    "id_correct": null,
+    "claim_correct": null
+  },
+  {
+    "id": "unanswerable_3",
+    "type": "unanswerable",
+    "question": "What's the weather in Bangalore today?",
+    "answer": "I don't have enough information to answer that confidently.",
+    "cited_ids": [],
+    "expected_ids": [],
+    "is_refusal": true,
+    "expect_refusal": true,
+    "refusal_correct": true,
+    "id_correct": null,
+    "claim_correct": null
+  },
+  {
+    "id": "unanswerable_4",
+    "type": "unanswerable",
+    "question": "How many employees does Razorpay have?",
+    "answer": "I don't have enough information to answer that confidently.",
+    "cited_ids": [],
+    "expected_ids": [],
+    "is_refusal": true,
+    "expect_refusal": true,
+    "refusal_correct": true,
+    "id_correct": null,
+    "claim_correct": null
+  },
+  {
+    "id": "unanswerable_5",
+    "type": "unanswerable",
+    "question": "What's the stock price of Razorpay?",
+    "answer": "I don't have enough information to answer that confidently.",
+    "cited_ids": [],
+    "expected_ids": [],
+    "is_refusal": true,
+    "expect_refusal": true,
+    "refusal_correct": true,
+    "id_correct": null,
+    "claim_correct": null
+  },
+  {
+    "id": "unanswerable_6",
+    "type": "unanswerable",
+    "question": "Summarize Settl.ai's Series A funding round.",
+    "answer": "I don't have enough information to answer that confidently.",
+    "cited_ids": [],
+    "expected_ids": [],
+    "is_refusal": true,
+    "expect_refusal": true,
+    "refusal_correct": true,
+    "id_correct": null,
+    "claim_correct": null
+  },
+  {
+    "id": "unanswerable_7",
+    "type": "unanswerable",
+    "question": "What programming language is the frontend written in?",
+    "answer": "I don't have enough information to answer that confidently.",
+    "cited_ids": [],
+    "expected_ids": [],
+    "is_refusal": true,
+    "expect_refusal": true,
+    "refusal_correct": true,
+    "id_correct": null,
+    "claim_correct": null
+  },
+  {
+    "id": "unanswerable_8",
+    "type": "unanswerable",
+    "question": "Who won the buildathon last year?",
+    "answer": "I don't have enough information to answer that confidently.",
+    "cited_ids": [],
+    "expected_ids": [],
+    "is_refusal": true,
+    "expect_refusal": true,
+    "refusal_correct": true,
+    "id_correct": null,
+    "claim_correct": null
+  },
+  {
+    "id": "unanswerable_9",
+    "type": "unanswerable",
+    "question": "What's the refund policy for failed transactions?",
+    "answer": "I don't have enough information to answer that confidently.",
+    "cited_ids": [],
+    "expected_ids": [],
+    "is_refusal": true,
+    "expect_refusal": true,
+    "refusal_correct": true,
+    "id_correct": null,
+    "claim_correct": null
+  }
+]

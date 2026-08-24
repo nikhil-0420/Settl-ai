@@ -6,3 +6,6 @@ sentence-transformers
 chromadb
 python-multipart
 pytest
+google-genai
+python-dotenv
+matplotlib
