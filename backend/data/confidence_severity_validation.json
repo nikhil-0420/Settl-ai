@@ -1,0 +1,82 @@
+{
+  "partial_payment": {
+    "n": 3,
+    "correlation": 1.0,
+    "expected_direction": "positive",
+    "matches_expected": true,
+    "plot": [
+      {
+        "deviation": 16955,
+        "confidence": 91
+      },
+      {
+        "deviation": 17179,
+        "confidence": 92
+      },
+      {
+        "deviation": 127773,
+        "confidence": 99
+      }
+    ]
+  },
+  "fee_deduction_err": {
+    "n": 3,
+    "correlation": 0.866,
+    "expected_direction": "positive",
+    "matches_expected": true,
+    "plot": [
+      {
+        "deviation": 304,
+        "confidence": 79
+      },
+      {
+        "deviation": 2484,
+        "confidence": 99
+      },
+      {
+        "deviation": 3205,
+        "confidence": 99
+      }
+    ]
+  },
+  "tds_gst_mismatch": {
+    "n": 3,
+    "correlation": 0.866,
+    "expected_direction": "positive",
+    "matches_expected": true,
+    "plot": [
+      {
+        "deviation": 274,
+        "confidence": 77
+      },
+      {
+        "deviation": 2437,
+        "confidence": 99
+      },
+      {
+        "deviation": 7740,
+        "confidence": 99
+      }
+    ]
+  },
+  "timing_gap": {
+    "n": 3,
+    "correlation": -1.0,
+    "expected_direction": "negative",
+    "matches_expected": true,
+    "plot": [
+      {
+        "deviation": 8,
+        "confidence": 78
+      },
+      {
+        "deviation": 6,
+        "confidence": 82
+      },
+      {
+        "deviation": 9,
+        "confidence": 75
+      }
+    ]
+  }
+}
