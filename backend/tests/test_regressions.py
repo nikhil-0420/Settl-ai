@@ -5,13 +5,11 @@ so it can't silently recur.
 import sys
 from pathlib import Path
 
-# make backend/app importable when pytest runs from backend/
 sys.path.insert(0, str(Path(__file__).parent.parent / "app"))
 
 import pandas as pd
 from matcher import classify_settlement_row, AMOUNT_TOLERANCE, FEE_TOLERANCE, TDS_TOLERANCE
 from generate_data import OUT_DIR
-
 
 def test_data_dir_resolves_regardless_of_cwd():
     """Broke log #1: OUT_DIR used to be a plain string relative to the shell's

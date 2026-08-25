@@ -46,8 +46,15 @@ settlement entries for the same order.
 """
 
 
-def ask(question, k=5, simulate_outage=False):
-    retrieved = search(question, k=k)
+def ask(question, k=5, simulate_outage=False, history=None):
+    history = history[-1:] if history else []
+
+    search_query = question
+    if history:
+        last_turn = history[-1]
+        search_query = f"{last_turn['question']} {last_turn['answer']} {question}"
+
+    retrieved = search(search_query, k=k)
     context = "\n".join(f"- {r['document']}" for r in retrieved)
     retrieved_ids = {r["id"] for r in retrieved}
 
@@ -66,8 +73,22 @@ def ask(question, k=5, simulate_outage=False):
                       question=question, answer=result["answer"], is_refusal=True)
         return result
 
-    prompt = f"{SYSTEM_PROMPT}\n\nRecords:\n{context}\n\nQuestion: {question}\n\nAnswer:"
+    history_section = ""
+    if history:
+        last_turn = history[-1]
+        history_section = (
+            f"\n\nPrevious exchange:\nQ: {last_turn['question']}\n"
+            f"A: {last_turn['answer']}\n\n"
+            f"If the current question below uses a pronoun or reference like "
+            f"'it' or 'that one', it refers to the order_id discussed in the "
+            f"previous exchange above — resolve it to that order_id, then "
+            f"answer normally using ONLY the Records section, following the "
+            f"same citation rules."
+        )
+
+    prompt = f"{SYSTEM_PROMPT}{history_section}\n\nRecords:\n{context}\n\nQuestion: {question}\n\nAnswer:"
     response = client.models.generate_content(model=MODEL, contents=prompt)
+
     answer = response.text.strip()
 
     cited_ids = set(re.findall(r"\[(\w[\w_]*)\]", answer))

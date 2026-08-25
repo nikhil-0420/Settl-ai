@@ -9,3 +9,4 @@ pytest
 google-genai
 python-dotenv
 matplotlib
+reportlab
