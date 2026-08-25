@@ -45,12 +45,31 @@ Answer: [order_200030S] and [order_200007L] each appear as duplicate
 settlement entries for the same order.
 """
 
+REFERENTIAL_PATTERN = re.compile(
+    r"\b(it|its|that|this|those|these|that one|that order|the same|their)\b",
+    re.IGNORECASE
+)
+STATUS_KEYWORDS = ["tds", "gst", "fee", "duplicate", "timing", "partial", "phantom", "unmatched", "clean"]
+
+
+def needs_history_context(question):
+    """A follow-up only needs prior-turn context if it doesn't already name
+    its own subject. A question with an explicit order_id or a known status
+    keyword is self-contained — folding in history would only dilute
+    retrieval with unrelated context from the prior turn."""
+    if ORDER_ID_PATTERN.search(question):
+        return False
+    if any(kw in question.lower() for kw in STATUS_KEYWORDS):
+        return False
+    return bool(REFERENTIAL_PATTERN.search(question))
+
 
 def ask(question, k=5, simulate_outage=False, history=None):
     history = history[-1:] if history else []
+    use_history = bool(history) and needs_history_context(question)
 
     search_query = question
-    if history:
+    if use_history:
         last_turn = history[-1]
         search_query = f"{last_turn['question']} {last_turn['answer']} {question}"
 
@@ -74,7 +93,7 @@ def ask(question, k=5, simulate_outage=False, history=None):
         return result
 
     history_section = ""
-    if history:
+    if use_history:
         last_turn = history[-1]
         history_section = (
             f"\n\nPrevious exchange:\nQ: {last_turn['question']}\n"
