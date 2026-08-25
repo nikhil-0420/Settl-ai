@@ -1,0 +1,66 @@
+[
+  {
+    "cycle": "Cycle 1",
+    "date": "2026-07-28",
+    "total_records": 84,
+    "match_rate": 0.8095,
+    "breakdown": {
+      "clean_match": 68,
+      "duplicate": 3,
+      "tds_gst_mismatch": 2,
+      "timing_gap": 4,
+      "partial_payment": 3,
+      "fee_deduction_err": 2,
+      "phantom_bank": 1,
+      "phantom_ledger": 1
+    }
+  },
+  {
+    "cycle": "Cycle 2",
+    "date": "2026-08-04",
+    "total_records": 90,
+    "match_rate": 0.7556,
+    "breakdown": {
+      "clean_match": 68,
+      "duplicate": 3,
+      "tds_gst_mismatch": 4,
+      "timing_gap": 4,
+      "partial_payment": 4,
+      "fee_deduction_err": 2,
+      "phantom_bank": 3,
+      "phantom_ledger": 2
+    }
+  },
+  {
+    "cycle": "Cycle 3",
+    "date": "2026-08-11",
+    "total_records": 84,
+    "match_rate": 0.7143,
+    "breakdown": {
+      "clean_match": 60,
+      "duplicate": 3,
+      "tds_gst_mismatch": 9,
+      "timing_gap": 2,
+      "partial_payment": 2,
+      "fee_deduction_err": 4,
+      "phantom_bank": 3,
+      "phantom_ledger": 1
+    }
+  },
+  {
+    "cycle": "Cycle 4",
+    "date": "2026-08-18",
+    "total_records": 89,
+    "match_rate": 0.7416,
+    "breakdown": {
+      "clean_match": 66,
+      "duplicate": 3,
+      "tds_gst_mismatch": 5,
+      "timing_gap": 4,
+      "partial_payment": 4,
+      "fee_deduction_err": 4,
+      "phantom_bank": 2,
+      "phantom_ledger": 1
+    }
+  }
+]
