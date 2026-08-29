@@ -12,12 +12,12 @@ Built for the Razorpay AI Buildathon — AI Finance Controller track.
 
 ## Status
 - [x] Day 1: synthetic data generator (3 sources + seeded mismatches + ground truth)
-- [ ] Day 2: matching engine
-- [ ] Day 3: exception classifier + confidence scoring
-- [ ] Day 4: FastAPI backend
-- [ ] Day 5: embeddings + retrieval
-- [ ] Day 6-7: Q&A agent
-- [ ] Day 8: audit trail + failure case
-- [ ] Day 9-10: React dashboard
+- [x] Day 2: matching engine
+- [x] Day 3: exception classifier + confidence scoring
+- [x] Day 4: FastAPI backend
+- [x] Day 5: embeddings + retrieval
+- [x] Day 6-7: Q&A agent
+- [x] Day 8: audit trail + failure case
+- [x] Day 9-10: React dashboard
 - [ ] Day 11: evaluation writeup
 - [ ] Day 12: deploy + pitch video
