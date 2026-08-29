@@ -119,12 +119,13 @@ def run_validation():
 
     for status, expected_dir in EXPECTED_DIRECTION.items():
         status_records = [r for r in records if r["status"] == status]
-        deviations, confidences = [], []
+        deviations, confidences, order_ids = [], [], []
         for r in status_records:
             dev = compute_deviation(r, settlement_by_id, bank_by_utr)
             if dev is not None:
                 deviations.append(dev)
                 confidences.append(r["confidence"])
+                order_ids.append(r.get("order_id") or r.get("utr") or "unknown")
 
         if len(deviations) < 2:
             results[status] = {"n": len(deviations), "correlation": None, "note": "not enough records to check"}
@@ -140,7 +141,10 @@ def run_validation():
             "correlation": round(corr, 3) if corr is not None else None,
             "expected_direction": expected_dir,
             "matches_expected": matches_expected,
-            "plot": [{"deviation": d, "confidence": c} for d, c in zip(deviations, confidences)],
+            "plot": [
+                {"deviation": d, "confidence": c, "order_id": oid}
+                for d, c, oid in zip(deviations, confidences, order_ids)
+            ],
 
         }
         plot_data[status] = (deviations, confidences)

@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  body {
+    @apply bg-bg text-ink-primary font-body antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-brass ring-offset-2 ring-offset-bg;
+  }
+}
+
+@layer utilities {
+  .num {
+    @apply font-mono tabular-nums;
+  }
+  .rule-line {
+    @apply border-rule;
+  }
+  .panel {
+    @apply bg-panel border border-rule rounded-card;
+  }
+  @keyframes draw {
+  to { transform: scaleX(1); }
+}
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@keyframes typingDot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
