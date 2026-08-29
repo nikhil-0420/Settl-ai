@@ -197,6 +197,14 @@ function AnswerCard({ result }) {
         {isRefusal && <span className="not-italic text-ink-faint shrink-0">—</span>}
         {result.answer}
       </p>
+      {isRefusal && (
+        <div className="flex items-center gap-1.5 mt-3 pt-3 border-t border-rule-soft text-xs text-ink-faint not-italic">
+          <span className="h-1 w-1 rounded-full bg-ink-faint shrink-0" />
+          {result.answer.includes("reasoning service is unavailable")
+            ? `Retrieved ${result.retrieved_ids?.length ?? 0} records, but the reasoning service failed before it could evaluate them.`
+            : `Searched ${result.retrieved_ids?.length ?? 0} records — none supported a confident, cited answer.`}
+        </div>
+      )}
       {!isRefusal && result.cited_ids?.length > 0 && (
         <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-rule-soft">
           {result.cited_ids.map((id) => (

@@ -78,7 +78,7 @@ export default function Trend() {
         </div>
       )}
 
-      {loading && <p className="text-ink-faint mt-8">Loading trend…</p>}
+      {loading && <p className="text-ink-muted mt-8">Loading trend…</p>}
 
       {matchRateData && (
         <motion.div
@@ -182,7 +182,7 @@ export default function Trend() {
           <div className="overflow-x-auto">
             <table className="w-full text-sm min-w-[820px]">
               <thead>
-                <tr className="border-b border-rule text-left text-xs uppercase tracking-wider text-ink-faint">
+                <tr className="border-b border-rule text-left text-xs uppercase tracking-wider text-ink-muted">
                   <th className="sticky left-0 bg-panel px-5 py-3 font-medium">Cycle</th>
                   <th className="px-5 py-3 font-medium">Date</th>
                   <th className="px-5 py-3 font-medium text-right">Total</th>

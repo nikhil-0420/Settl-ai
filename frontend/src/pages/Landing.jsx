@@ -11,7 +11,7 @@ import { SettlMark } from "../components/SettlMark.jsx";
 
 function EyebrowRule({ children }) {
   return (
-    <div className="flex items-center gap-3 text-xs uppercase tracking-widest text-ink-faint">
+    <div className="flex items-center gap-3 text-xs uppercase tracking-widest text-ink-muted">
       <span className="h-px w-8 bg-rule" />
       {children}
     </div>
@@ -20,11 +20,12 @@ function EyebrowRule({ children }) {
 
 export default function Landing() {
   const [summary, setSummary] = useState(null);
+  const [summaryError, setSummaryError] = useState(false);
   const animatedMatchRate = useCountUp(summary ? summary.match_rate * 100 : null, { decimals: 1 });
   const animatedTotal = useCountUp(summary?.total_records ?? null);
 
   useEffect(() => {
-    api.matchSummary().then(setSummary).catch(() => { });
+    api.matchSummary().then(setSummary).catch(() => setSummaryError(true));
   }, []);
 
   return (
@@ -100,14 +101,20 @@ export default function Landing() {
                 <div className="num text-2xl font-semibold text-brass">
                   {animatedMatchRate}%
                 </div>
-                <div className="text-xs text-ink-faint mt-1">match rate</div>
+                <div className="text-xs text-ink-muted mt-1">match rate</div>
               </div>
               <div>
                 <div className="num text-2xl font-semibold text-ink-primary">
                   {animatedTotal}
                 </div>
-                <div className="text-xs text-ink-faint mt-1">records reconciled</div>
+                <div className="text-xs text-ink-muted mt-1">records reconciled</div>
               </div>
+            </div>
+          )}
+          {summaryError && (
+            <div className="flex items-center gap-2 mt-12 pt-6 border-t border-rule-soft text-xs text-ink-muted">
+              <span className="h-1.5 w-1.5 rounded-full bg-settle-critical shrink-0" />
+              Live stats unavailable — backend didn't respond.
             </div>
           )}
         </div>

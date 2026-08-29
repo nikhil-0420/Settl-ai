@@ -5,6 +5,7 @@ import { api, CONFIDENCE_EXPLANATIONS } from "../lib/api.js";
 import InfoTooltip from "../components/InfoTooltip.jsx";
 import { motion } from "framer-motion";
 import CopyButton from "../components/CopyButton.jsx";
+import DecisionTrace from "../components/DecisionTrace.jsx";
 
 const FLAGGED_FIELDS = {
   fee_deduction_err: ["fee", "tax"],
@@ -173,7 +174,7 @@ export default function RecordDetail() {
         ← Back to dashboard
       </Link>
 
-      <div className="flex items-center justify-between mt-4 mb-10">
+      <div className="flex items-center justify-between mt-4 mb-3">
         <h1 className="num font-display text-2xl font-semibold">{orderId}</h1>
         <div className="flex items-center gap-3">
           {detail?.confidence != null && (
@@ -191,6 +192,10 @@ export default function RecordDetail() {
           {detail?.classified_status && <StatusBadge status={detail.classified_status} />}
         </div>
       </div>
+
+      {detail?.classified_status && (
+        <DecisionTrace status={detail.classified_status} confidence={detail.confidence} />
+      )}
 
       {loading && <p className="text-ink-faint">Loading record…</p>}
       {error && (

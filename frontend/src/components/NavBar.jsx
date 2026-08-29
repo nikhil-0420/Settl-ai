@@ -9,6 +9,7 @@ const LINKS = [
   { to: "/audit", label: "Audit trail" },
   { to: "/calibration", label: "Confidence check" },
   { to: "/trend", label: "Trend" },
+  { to: "/appendix", label: "How it works" },
 ];
 
 export default function NavBar() {

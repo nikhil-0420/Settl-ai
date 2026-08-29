@@ -8,8 +8,11 @@ import Audit from "./pages/Audit.jsx";
 import Calibration from "./pages/Calibration.jsx";
 import Trend from "./pages/Trend.jsx";
 import ReactiveBackground from "./components/ReactiveBackground.jsx";
+import CommandPalette from "./components/Commandpalette.jsx";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect } from "react";
+import Appendix from "./pages/Appendix.jsx";
+
 
 const PAGE_TITLES = {
   "/": "Settl.ai — Reconciliation, grounded",
@@ -18,6 +21,7 @@ const PAGE_TITLES = {
   "/audit": "Settl.ai — Audit trail",
   "/calibration": "Settl.ai — Confidence, checked",
   "/trend": "Settl.ai — Trend across cycles",
+  "/appendix": "Settl.ai — How it works",
 };
 
 function PageFade({ children }) {
@@ -47,6 +51,7 @@ export default function App() {
   return (
     <div className="min-h-screen">
       <ReactiveBackground />
+      <CommandPalette />
       {!isLanding && <NavBar />}
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
@@ -57,6 +62,7 @@ export default function App() {
           <Route path="/audit" element={<PageFade><Audit /></PageFade>} />
           <Route path="/calibration" element={<PageFade><Calibration /></PageFade>} />
           <Route path="/trend" element={<PageFade><Trend /></PageFade>} />
+          <Route path="/appendix" element={<PageFade><Appendix /></PageFade>} />
         </Routes>
       </AnimatePresence>
     </div>

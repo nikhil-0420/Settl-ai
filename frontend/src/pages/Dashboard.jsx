@@ -7,6 +7,8 @@ import InfoTooltip from "../components/InfoTooltip.jsx";
 import useCountUp from "../lib/useCountUp.js";
 import TiltCard from "../components/TiltCard.jsx";
 import { motion } from "framer-motion";
+import DecisionPanels from "../components/DecisionPanels.jsx";
+
 
 export default function Dashboard() {
   const [summary, setSummary] = useState(null);
@@ -88,6 +90,7 @@ export default function Dashboard() {
           <TiltCard><StatCard label="Exceptions" value={animatedExceptions} /></TiltCard>
         </div>
       )}
+      {summary && <DecisionPanels summary={summary} />}
 
       {/* Status filter */}
       <div className="flex items-center gap-2 flex-wrap mb-6">

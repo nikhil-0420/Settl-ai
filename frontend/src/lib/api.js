@@ -38,7 +38,7 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ question, history }),
     }),
-  auditLog: () => request("/audit-log"),
+  auditLog: (limit = 50) => request(`/audit-log?limit=${limit}`),
   trend: () => request("/trend"),
   resolveRecord: (orderId, note) =>
     request(`/records/${orderId}/resolve`, {

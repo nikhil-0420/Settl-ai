@@ -96,7 +96,7 @@ function StatusChart({ status, result }) {
           </span>
         )}
       </div>
-      <div className="text-xs text-ink-faint mb-3">
+      <div className="text-xs text-ink-muted mb-3">
         n={result.n} · Spearman ρ = {result.correlation ?? "n/a"} · expected{" "}
         {result.expected_direction}
       </div>
@@ -135,7 +135,7 @@ function StatusChart({ status, result }) {
           </ScatterChart>
         </ResponsiveContainer>
       ) : (
-        <p className="text-xs text-ink-faint">
+        <p className="text-xs text-ink-muted">
           {result.note || "No chart data available for this status."}
         </p>
       )}
