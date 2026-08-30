@@ -7,6 +7,8 @@ const STATUS_CONFIG = {
   duplicate: { label: "Duplicate", color: "text-brass", dot: "bg-brass" },
   phantom_bank: { label: "Phantom bank credit", color: "text-settle-critical", dot: "bg-settle-critical" },
   phantom_ledger: { label: "Phantom ledger entry", color: "text-settle-critical", dot: "bg-settle-critical" },
+  ledger_missing: { label: "Ledger entry missing", color: "text-settle-critical", dot: "bg-settle-critical" },
+  ledger_mismatch: { label: "Ledger amount mismatch", color: "text-settle-critical", dot: "bg-settle-critical" },
   unmatched: { label: "Unmatched", color: "text-ink-muted", dot: "bg-ink-muted" },
 };
 

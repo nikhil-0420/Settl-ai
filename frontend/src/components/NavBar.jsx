@@ -2,7 +2,6 @@ import { NavLink, useLocation } from "react-router-dom";
 import { useRef, useEffect, useState } from "react";
 import { SettlMark } from "../components/SettlMark.jsx";
 
-
 const LINKS = [
   { to: "/dashboard", label: "Dashboard" },
   { to: "/ask", label: "Ask" },
@@ -10,6 +9,7 @@ const LINKS = [
   { to: "/calibration", label: "Confidence check" },
   { to: "/trend", label: "Trend" },
   { to: "/appendix", label: "How it works" },
+  { to: "/upload", label: "Try your data" },
 ];
 
 export default function NavBar() {
@@ -25,17 +25,23 @@ export default function NavBar() {
   }, [location.pathname]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-rule bg-bg/90 backdrop-blur">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-2">
-        <NavLink to="/" className="flex items-center gap-2.5 group">
+    <>
+      {/* Logo + nav pill float together as a centered group — positioning only,
+          not visually merged: logo has no background/border of its own. */}
+      <div className="fixed top-4 left-1/2 -translate-x-1/2 z-40 flex items-center gap-4">
+        <NavLink to="/" className="flex items-center gap-2.5 group shrink-0">
           <SettlMark size={26} />
-          <span className="font-display font-semibold text-xl tracking-tight">
+          <span className="font-display font-semibold text-xl tracking-tight hidden sm:inline">
             Settl<span className="text-brass">.ai</span>
           </span>
         </NavLink>
-        <nav ref={navRef} className="relative flex items-center gap-0.5 sm:gap-1 overflow-x-auto scrollbar-none">
+
+        <nav
+          ref={navRef}
+          className="relative inline-flex w-fit items-center gap-0.5 px-1.5 py-1.5 rounded-full border border-rule-soft bg-panel/80 backdrop-blur-md shadow-lg shadow-black/20 overflow-x-auto scrollbar-none max-w-[70vw]"
+        >
           <span
-            className="absolute bottom-0 h-0.5 bg-brass transition-all duration-200 ease-out"
+            className="absolute inset-y-1.5 rounded-full bg-panel-raised transition-all duration-200 ease-out"
             style={{ left: indicator.left, width: indicator.width }}
           />
           {LINKS.map((link) => (
@@ -43,9 +49,9 @@ export default function NavBar() {
               key={link.to}
               to={link.to}
               className={({ isActive }) =>
-                `px-2 sm:px-3 py-2 text-xs sm:text-sm rounded-md transition-colors whitespace-nowrap ${isActive
-                  ? "text-brass bg-panel-raised"
-                  : "text-ink-muted hover:text-ink-primary hover:bg-panel-raised"
+                `relative px-2.5 sm:px-3.5 py-1.5 text-xs sm:text-sm rounded-full transition-colors whitespace-nowrap ${isActive
+                  ? "text-brass"
+                  : "text-ink-muted hover:text-ink-primary"
                 }`
               }
             >
@@ -54,6 +60,9 @@ export default function NavBar() {
           ))}
         </nav>
       </div>
-    </header>
+
+      {/* Spacer — nav is now fixed/out of flow, so page content needs room below it */}
+      <div className="h-14" />
+    </>
   );
 }

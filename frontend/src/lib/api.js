@@ -29,6 +29,7 @@ export const CONFIDENCE_EXPLANATIONS = {
   phantom_ledger: "No corresponding ledger invoice exists — always flagged for manual review regardless of magnitude.",
 };
 
+
 export const api = {
   matchSummary: () => request("/match-summary"),
   records: (status) => request(`/records${status ? `?status=${status}` : ""}`),
@@ -45,4 +46,16 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ note }),
     }),
+  uploadReconcile: async (files) => {
+    const formData = new FormData();
+    formData.append("settlement_report", files.settlement);
+    formData.append("bank_statement", files.bank);
+    formData.append("internal_ledger", files.ledger);
+    const res = await fetch(`${BASE_URL}/upload`, { method: "POST", body: formData });
+    if (!res.ok) {
+      const detail = await res.json().catch(() => ({}));
+      throw new Error(detail.detail || `Request failed: ${res.status}`);
+    }
+    return res.json();
+  },
 };

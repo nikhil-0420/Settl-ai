@@ -20,13 +20,13 @@ FEE_TOLERANCE = 100              # paise (~₹1) — fee/tax is arithmetic, shou
 DATE_WINDOW_DAYS = 12             # beyond T+2 norm, still "timing_gap" not "unmatched"
 TDS_TOLERANCE = 100              # paise (~₹1) — TDS is arithmetic, should be exact
 
-def load_data():
-    settlement = pd.read_csv(DATA_DIR / "settlement_report.csv", parse_dates=["settled_at"])
-    bank = pd.read_csv(DATA_DIR / "bank_statement.csv", parse_dates=["value_date"])
-    ledger = pd.read_csv(DATA_DIR / "internal_ledger.csv", parse_dates=["invoice_date"])
+def load_data(data_dir=None):
+    data_dir = data_dir or DATA_DIR
+    settlement = pd.read_csv(data_dir / "settlement_report.csv", parse_dates=["settled_at"])
+    bank = pd.read_csv(data_dir / "bank_statement.csv", parse_dates=["value_date"])
+    ledger = pd.read_csv(data_dir / "internal_ledger.csv", parse_dates=["invoice_date"])
     return settlement, bank, ledger
 
-# in classify_settlement_row(), replace the whole function body with:
 def classify_settlement_row(row, bank_by_utr, ledger_by_order):
     bank_row = bank_by_utr.get(row["utr"])
     if bank_row is None:
@@ -52,10 +52,17 @@ def classify_settlement_row(row, bank_by_utr, ledger_by_order):
         return "timing_gap"
     if day_gap > DATE_WINDOW_DAYS + 2:
         return "unmatched"
+
+    ledger_row = ledger_by_order.get(row["order_id"])
+    if ledger_row is None:
+        return "ledger_missing"
+    ledger_amount_diff = abs(ledger_row["expected_amount"] - row["amount"])
+    if ledger_amount_diff > AMOUNT_TOLERANCE:
+        return "ledger_mismatch"
     return "clean_match"
 
-def run_matching():
-    settlement, bank, ledger = load_data()
+def run_matching(data_dir=None):
+    settlement, bank, ledger = load_data(data_dir)
 
     bank_by_utr = bank.set_index("utr").to_dict("index")
     ledger_by_order = ledger.set_index("order_id").to_dict("index")
@@ -92,8 +99,14 @@ def run_matching():
 
     return results
 
-def self_grade(results):
-    with open(DATA_DIR / "ground_truth.json") as f:
+def self_grade(results, data_dir=None):
+    data_dir = data_dir or DATA_DIR
+    truth_path = data_dir / "ground_truth.json"
+    if not truth_path.exists():
+        print("No ground_truth.json found for this dataset — skipping self-grade.")
+        return
+
+    with open(truth_path) as f:
         truth = json.load(f)
 
     correct, total, mismatches = 0, 0, []
@@ -108,7 +121,8 @@ def self_grade(results):
         else:
             mismatches.append((key, expected, r["status"]))
 
-    print(f"Accuracy: {correct}/{total} = {correct/total:.1%}")
+    if total:
+        print(f"Accuracy: {correct}/{total} = {correct/total:.1%}")
     if mismatches:
         print("Mismatches (key, expected, got):")
         for m in mismatches:

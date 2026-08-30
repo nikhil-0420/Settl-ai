@@ -33,6 +33,12 @@ from export import build_csv, build_pdf
 from fastapi.responses import Response
 from datetime import datetime, timezone
 
+import shutil
+import tempfile
+from fastapi import UploadFile, File
+
+from classifier import build_summary as build_summary_for
+
 DATA_DIR = Path(__file__).parent.parent / "data"
 
 app = FastAPI(title="Settl.ai API")
@@ -44,6 +50,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+REQUIRED_COLUMNS = {
+    "settlement_report.csv": {"settlement_id", "payment_id", "order_id", "amount", "fee", "tax", "tds", "net_amount", "settled_at", "utr", "method"},
+    "bank_statement.csv": {"utr", "credit_amount", "value_date", "narration"},
+    "internal_ledger.csv": {"order_id", "invoice_id", "expected_amount", "invoice_date", "status"},
+}
 
 def load_summary():
     with open(DATA_DIR / "reconciliation_summary.json") as f:
@@ -56,6 +67,19 @@ def load_cycle_history():
     with open(path) as f:
         return json.load(f)
 
+def validate_csv_columns(filename: str, content: bytes):
+    import io
+    header_line = content.split(b"\n", 1)[0].decode("utf-8-sig").strip()
+    actual_columns = set(col.strip() for col in header_line.split(","))
+    expected = REQUIRED_COLUMNS[filename]
+    missing = expected - actual_columns
+    if missing:
+        raise HTTPException(
+            status_code=400,
+            detail=f"{filename} is missing required columns: {', '.join(sorted(missing))}",
+        )
+
+    
 @app.get("/match-summary")
 def match_summary():
     summary = load_summary()
@@ -189,3 +213,34 @@ def audit_log(limit: int = 50):
 @app.get("/")
 def root():
     return {"status": "Settl.ai API running"}
+
+@app.post("/upload")
+async def upload_and_reconcile(
+    settlement_report: UploadFile = File(...),
+    bank_statement: UploadFile = File(...),
+    internal_ledger: UploadFile = File(...),
+):
+    files = {
+        "settlement_report.csv": settlement_report,
+        "bank_statement.csv": bank_statement,
+        "internal_ledger.csv": internal_ledger,
+    }
+
+    contents = {}
+    for filename, upload in files.items():
+        content = await upload.read()
+        validate_csv_columns(filename, content)
+        contents[filename] = content
+
+    temp_dir = Path(tempfile.mkdtemp(prefix="settl_upload_"))
+    try:
+        for filename, content in contents.items():
+            with open(temp_dir / filename, "wb") as f:
+                f.write(content)
+
+        summary = build_summary_for(data_dir=temp_dir, write_file=False)
+        return summary
+    except Exception as e:
+        raise HTTPException(status_code=422, detail=f"Couldn't process this data: {e}")
+    finally:
+        shutil.rmtree(temp_dir, ignore_errors=True)

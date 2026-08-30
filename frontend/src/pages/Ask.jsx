@@ -9,9 +9,20 @@ const SAMPLE_QUESTIONS = [
   "What was Settl.ai's revenue last quarter?",
 ];
 
+const HISTORY_KEY = "settl_ask_history";
+
+function loadStoredHistory() {
+  try {
+    const raw = sessionStorage.getItem(HISTORY_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
 export default function Ask() {
   const [question, setQuestion] = useState("");
-  const [history, setHistory] = useState([]);
+  const [history, setHistory] = useState(loadStoredHistory);
   const [loading, setLoading] = useState(false);
   const [simulateOutage, setSimulateOutage] = useState(false);
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
@@ -27,6 +38,14 @@ export default function Ask() {
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [history, loading]);
+
+    useEffect(() => {
+    try {
+      sessionStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+    } catch {
+      // ignore storage errors (e.g. private browsing quota)
+    }
+  }, [history]);
 
   const submit = async (q) => {
     const finalQuestion = q ?? question;
@@ -52,7 +71,10 @@ export default function Ask() {
     }
   };
 
-  const clearHistory = () => setHistory([]);
+  const clearHistory = () => {
+    setHistory([]);
+    sessionStorage.removeItem(HISTORY_KEY);
+  };
 
   return (
     <div className="max-w-3xl mx-auto px-6 py-12 flex flex-col" style={{ minHeight: "calc(100vh - 64px)" }}>
