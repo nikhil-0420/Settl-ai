@@ -45,7 +45,11 @@ app = FastAPI(title="Settl.ai API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Vite's default dev port
+    allow_origins=[
+        "http://localhost:5173",           # local dev
+        "https://settl-ai.vercel.app",     # production frontend
+    ],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
