@@ -142,7 +142,24 @@ def _get_search_collection():
         )
     return _search_collection
 
+def ensure_index_built():
+    """Call this on app startup. Builds the index only if it doesn't
+    already exist / is empty, so we don't re-embed via the Gemini API
+    on every cold start (slow + burns quota)."""
+    client = chromadb.PersistentClient(path=str(CHROMA_DIR))
+    try:
+        collection = client.get_collection(
+            "reconciliation_records", embedding_function=_embedding_fn
+        )
+        if collection.count() > 0:
+            print(f"Chroma collection already populated ({collection.count()} records), skipping rebuild")
+            return
+    except Exception:
+        pass  # collection doesn't exist yet — fall through to build it
 
+    print("Chroma collection missing or empty — building index now...")
+    build_index()
+    
 def search(query, k=5):
     collection = _get_search_collection()
 

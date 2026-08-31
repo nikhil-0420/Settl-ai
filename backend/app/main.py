@@ -39,9 +39,15 @@ from fastapi import UploadFile, File
 
 from classifier import build_summary as build_summary_for
 
+from app.embeddings import ensure_index_built
+
 DATA_DIR = Path(__file__).parent.parent / "data"
 
 app = FastAPI(title="Settl.ai API")
+
+@app.on_event("startup")
+def startup_event():
+    ensure_index_built()
 
 app.add_middleware(
     CORSMiddleware,
