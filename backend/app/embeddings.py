@@ -1,8 +1,17 @@
 """
 Settl.ai embeddings + retrieval layer.
 
-Builds a Chroma vector index over all reconciliation records (local MiniLM
-embeddings, CPU-only) and exposes search() for the Q&A agent.
+Builds a Chroma vector index over all reconciliation records using the
+Gemini API for embeddings (not a local model) and exposes search() for the
+Q&A agent.
+
+Previously used a local sentence-transformers model (all-MiniLM-L6-v2),
+which pulls in torch. On Render's free tier (~512MB RAM), that combination
+silently OOM-killed the process on the very first /ask request — GET
+endpoints never touched this file so they worked fine, masking the problem.
+No Python traceback appeared because the OS kills the process directly, not
+a catchable exception. Switched to Gemini's embed_content API to remove the
+heavy local dependency entirely. See broke-log bug #9.
 
 Hybrid retrieval: semantic vector search alone doesn't reliably surface
 arbitrary alphanumeric identifiers (an order_id has no real semantic
@@ -17,17 +26,53 @@ concurrent requests and crashes. See broke-log bug #8.
 """
 
 import json
-from pathlib import Path
+import os
 import re
+from pathlib import Path
+
 import chromadb
-from chromadb.utils import embedding_functions
+from google import genai
+from dotenv import load_dotenv
+
+load_dotenv(Path(__file__).parent.parent / ".env")
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 CHROMA_DIR = Path(__file__).parent.parent / "chroma_db"
 ORDER_ID_PATTERN = re.compile(r"order_\d+[A-Za-z]?", re.IGNORECASE)
 
+EMBED_MODEL = "gemini-embedding-001"
+
+_genai_client = None
 _search_client = None
 _search_collection = None
+
+
+def _get_genai_client():
+    """Lazy — must not run at module import time. qa_agent.py imports this
+    module before it calls load_dotenv() itself, so reading the API key at
+    import time would fail locally (Render sets the real env var directly,
+    so it's only a local-dev ordering issue, but lazy init sidesteps it
+    either way)."""
+    global _genai_client
+    if _genai_client is None:
+        _genai_client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+    return _genai_client
+
+
+class GeminiEmbeddingFunction:
+    """Chroma-compatible embedding function backed by the Gemini API.
+    gemini-embedding-001 returns one embedding per input string in a batch
+    call, matching Chroma's expected (list[str] -> list[list[float]])
+    contract directly — gemini-embedding-2 aggregates multiple inputs into
+    a single vector instead, which would not work here."""
+
+    def __call__(self, input):
+        client = _get_genai_client()
+        result = client.models.embed_content(model=EMBED_MODEL, contents=list(input))
+        return [e.values for e in result.embeddings]
+
+
+_embedding_fn = GeminiEmbeddingFunction()
 
 
 def record_to_text(r):
@@ -58,17 +103,13 @@ def build_index():
 
     records = summary["records"]
 
-    embedding_fn = embedding_functions.SentenceTransformerEmbeddingFunction(
-        model_name="all-MiniLM-L6-v2"
-    )
-
     client = chromadb.PersistentClient(path=str(CHROMA_DIR))
     try:
         client.delete_collection("reconciliation_records")
     except Exception:
         pass
     collection = client.create_collection(
-        name="reconciliation_records", embedding_function=embedding_fn
+        name="reconciliation_records", embedding_function=_embedding_fn
     )
 
     ids, documents, metadatas = [], [], []
@@ -95,12 +136,9 @@ def _get_search_collection():
     handling (KeyError / AttributeError from Chroma's internal teardown)."""
     global _search_client, _search_collection
     if _search_collection is None:
-        embedding_fn = embedding_functions.SentenceTransformerEmbeddingFunction(
-            model_name="all-MiniLM-L6-v2"
-        )
         _search_client = chromadb.PersistentClient(path=str(CHROMA_DIR))
         _search_collection = _search_client.get_collection(
-            "reconciliation_records", embedding_function=embedding_fn
+            "reconciliation_records", embedding_function=_embedding_fn
         )
     return _search_collection
 
