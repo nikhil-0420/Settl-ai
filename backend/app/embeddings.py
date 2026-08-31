@@ -33,6 +33,7 @@ from pathlib import Path
 import chromadb
 from google import genai
 from dotenv import load_dotenv
+from chromadb import Documents, EmbeddingFunction, Embeddings
 
 load_dotenv(Path(__file__).parent.parent / ".env")
 
@@ -59,17 +60,27 @@ def _get_genai_client():
     return _genai_client
 
 
-class GeminiEmbeddingFunction:
+class GeminiEmbeddingFunction(EmbeddingFunction):
     """Chroma-compatible embedding function backed by the Gemini API.
     gemini-embedding-001 returns one embedding per input string in a batch
     call, matching Chroma's expected (list[str] -> list[list[float]])
     contract directly — gemini-embedding-2 aggregates multiple inputs into
     a single vector instead, which would not work here."""
 
-    def __call__(self, input):
+    def __call__(self, input: Documents) -> Embeddings:
         client = _get_genai_client()
         result = client.models.embed_content(model=EMBED_MODEL, contents=list(input))
         return [e.values for e in result.embeddings]
+
+    def name(self) -> str:
+        return "gemini_embedding_function"
+
+    @staticmethod
+    def build_from_config(config: dict) -> "GeminiEmbeddingFunction":
+        return GeminiEmbeddingFunction()
+
+    def get_config(self) -> dict:
+        return {}
 
 
 _embedding_fn = GeminiEmbeddingFunction()
@@ -159,7 +170,7 @@ def ensure_index_built():
 
     print("Chroma collection missing or empty — building index now...")
     build_index()
-    
+
 def search(query, k=5):
     collection = _get_search_collection()
 
