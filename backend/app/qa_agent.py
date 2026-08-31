@@ -50,18 +50,24 @@ REFERENTIAL_PATTERN = re.compile(
     re.IGNORECASE
 )
 STATUS_KEYWORDS = ["tds", "gst", "fee", "duplicate", "timing", "partial", "phantom", "unmatched", "clean"]
+BROAD_QUERY_KEYWORDS = ["total", "count", "overall", "summary", "how many", "match rate", "all orders", "breakdown"]
 
 
 def needs_history_context(question):
     """A follow-up only needs prior-turn context if it doesn't already name
-    its own subject. A question with an explicit order_id or a known status
-    keyword is self-contained — folding in history would only dilute
-    retrieval with unrelated context from the prior turn."""
+    its own subject. A question with an explicit order_id, a known status
+    keyword, or a broad/aggregate keyword is self-contained. Otherwise, if
+    history exists, assume it's a continuation — implicit follow-ups
+    ("what's the confidence score?") don't always use a pronoun, so we can't
+    rely on pronoun-matching alone."""
     if ORDER_ID_PATTERN.search(question):
         return False
-    if any(kw in question.lower() for kw in STATUS_KEYWORDS):
+    q = question.lower()
+    if any(kw in q for kw in STATUS_KEYWORDS):
         return False
-    return bool(REFERENTIAL_PATTERN.search(question))
+    if any(kw in q for kw in BROAD_QUERY_KEYWORDS):
+        return False
+    return True
 
 
 def ask(question, k=5, simulate_outage=False, history=None):
