@@ -211,14 +211,23 @@ export default function Ask() {
 
 function AnswerCard({ result }) {
   const isRefusal = result.is_refusal;
+  const hasBadCitation = !isRefusal && result.valid_citations === false;
+
   return (
     <div
-      className={`max-w-[85%] rounded-2xl border px-4 py-3.5 ${isRefusal ? "border-ink-faint/30" : "border-brass/30"}`}
+      className={`max-w-[85%] rounded-2xl border px-4 py-3.5 ${
+        isRefusal
+          ? "border-ink-faint/30"
+          : hasBadCitation
+          ? "border-settle-critical/40"
+          : "border-brass/30"
+      }`}
     >
       <p className={`text-sm leading-relaxed ${isRefusal ? "text-ink-muted italic flex gap-2" : "text-ink-primary"}`}>
         {isRefusal && <span className="not-italic text-ink-faint shrink-0">—</span>}
         {result.answer}
       </p>
+
       {isRefusal && (
         <div className="flex items-center gap-1.5 mt-3 pt-3 border-t border-rule-soft text-xs text-ink-faint not-italic">
           <span className="h-1 w-1 rounded-full bg-ink-faint shrink-0" />
@@ -227,6 +236,22 @@ function AnswerCard({ result }) {
             : `Searched ${result.retrieved_ids?.length ?? 0} records — none supported a confident, cited answer.`}
         </div>
       )}
+
+      {!isRefusal && (
+        <div className="flex items-center gap-1.5 mt-3 pt-3 border-t border-rule-soft text-xs not-italic">
+          <span
+            className={`h-1 w-1 rounded-full shrink-0 ${
+              hasBadCitation ? "bg-settle-critical" : "bg-brass"
+            }`}
+          />
+          <span className={hasBadCitation ? "text-settle-critical" : "text-ink-faint"}>
+            {hasBadCitation
+              ? `Cited an order outside the ${result.retrieved_ids?.length ?? 0} retrieved records — flagged for review.`
+              : `Grounded on ${result.cited_ids?.length ?? 0} of ${result.retrieved_ids?.length ?? 0} retrieved records.`}
+          </span>
+        </div>
+      )}
+
       {!isRefusal && result.cited_ids?.length > 0 && (
         <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-rule-soft">
           {result.cited_ids.map((id) => (
