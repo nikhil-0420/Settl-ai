@@ -12,6 +12,7 @@ import CommandPalette from "./components/Commandpalette.jsx";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect } from "react";
 import Appendix from "./pages/Appendix.jsx";
+import LiveUpload from "./pages/LiveUpload.jsx";
 
 
 const PAGE_TITLES = {
@@ -22,6 +23,7 @@ const PAGE_TITLES = {
   "/calibration": "Settl.ai — Confidence, checked",
   "/trend": "Settl.ai — Trend across cycles",
   "/appendix": "Settl.ai — How it works",
+  "/upload": "Settl.ai — Run it on your own data",
 };
 
 function PageFade({ children }) {
@@ -63,6 +65,7 @@ export default function App() {
           <Route path="/calibration" element={<PageFade><Calibration /></PageFade>} />
           <Route path="/trend" element={<PageFade><Trend /></PageFade>} />
           <Route path="/appendix" element={<PageFade><Appendix /></PageFade>} />
+          <Route path="/upload" element={<PageFade><LiveUpload /></PageFade>} />
         </Routes>
       </AnimatePresence>
     </div>

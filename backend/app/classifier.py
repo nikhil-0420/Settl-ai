@@ -18,7 +18,7 @@ from matcher import run_matching, load_data, AMOUNT_TOLERANCE, FEE_TOLERANCE, DA
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 
-def compute_confidence(status, row, bank_by_utr):
+def compute_confidence(status, row, bank_by_utr, ledger_by_order):
     """Confidence = how decisively the evidence supports this classification.
     Higher = further from the tolerance boundary (unambiguous). Lower = close
     to the edge (a human should double check it)."""
@@ -34,7 +34,6 @@ def compute_confidence(status, row, bank_by_utr):
     if status == "partial_payment":
         bank_row = bank_by_utr.get(row["utr"])
         amount_diff = abs(bank_row["credit_amount"] - row["net_amount"]) if bank_row else 0
-        # further past the tolerance edge = more obviously a real partial payment
         excess_ratio = min((amount_diff - AMOUNT_TOLERANCE) / AMOUNT_TOLERANCE, 3) if AMOUNT_TOLERANCE else 0
         return round(min(60 + excess_ratio * 13, 99))
 
@@ -45,7 +44,6 @@ def compute_confidence(status, row, bank_by_utr):
         excess_ratio = min((fee_tax_diff - FEE_TOLERANCE) / FEE_TOLERANCE, 5) if FEE_TOLERANCE else 0
         return round(min(65 + excess_ratio * 7, 99))
 
-    
     if status == "tds_gst_mismatch":
         expected_tds = round(row["amount"] * 0.01)
         tds_diff = abs(row["tds"] - expected_tds)
@@ -57,30 +55,39 @@ def compute_confidence(status, row, bank_by_utr):
         if not bank_row:
             return 60
         day_gap = (bank_row["value_date"] - row["settled_at"]).days
-        # gaps near the T+2 norm are more "clearly just a gap"; gaps near the
-        # outer window edge are more ambiguous, so confidence goes down
         window_position = (day_gap - 2) / (DATE_WINDOW_DAYS) if DATE_WINDOW_DAYS else 0
         return round(max(55, 90 - window_position * 25))
 
     if status == "duplicate":
-        return 95  # structurally obvious, not a graduated judgment
+        return 95
 
     if status == "unmatched":
-        return 90  # fired because nothing else explained it
+        return 90
 
-    return 50  # phantom_bank / phantom_ledger — always flag for review
+    if status == "ledger_missing":
+       return 88
 
-def build_summary():
-    settlement, bank, ledger = load_data()
+    if status == "ledger_mismatch":
+       ledger_row = ledger_by_order.get(row["order_id"])
+       ledger_diff = abs(ledger_row["expected_amount"] - row["amount"]) if ledger_row else 0
+       excess_ratio = min((ledger_diff - AMOUNT_TOLERANCE) / AMOUNT_TOLERANCE, 3) if AMOUNT_TOLERANCE else 0
+       return round(min(60 + excess_ratio * 13, 99))
+
+    return 50
+
+def build_summary(data_dir=None, write_file=True):
+    data_dir = data_dir or DATA_DIR
+    settlement, bank, ledger = load_data(data_dir)
     bank_by_utr = bank.set_index("utr").to_dict("index")
-    results = run_matching()
+    ledger_by_order = ledger.set_index("order_id").to_dict("index")
+    results = run_matching(data_dir)
 
     for r in results:
         row = settlement[settlement["settlement_id"] == r.get("settlement_id")]
         if not row.empty:
-            r["confidence"] = compute_confidence(r["status"], row.iloc[0], bank_by_utr)
+            r["confidence"] = compute_confidence(r["status"], row.iloc[0], bank_by_utr, ledger_by_order)
         else:
-            r["confidence"] = compute_confidence(r["status"], {}, bank_by_utr)
+            r["confidence"] = compute_confidence(r["status"], {}, bank_by_utr, ledger_by_order)
 
     by_status = defaultdict(list)
     for r in results:
@@ -102,8 +109,9 @@ def build_summary():
         "records": results,
     }
 
-    with open(DATA_DIR / "reconciliation_summary.json", "w") as f:
-        json.dump(summary, f, indent=2, default=str)
+    if write_file:
+        with open(data_dir / "reconciliation_summary.json", "w") as f:
+            json.dump(summary, f, indent=2, default=str)
 
     print(f"Match rate: {summary['match_rate']:.1%}")
     print("Breakdown:", {k: v["count"] for k, v in summary["breakdown"].items()})
