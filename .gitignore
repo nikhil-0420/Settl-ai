@@ -5,3 +5,4 @@ node_modules/
 dist/
 .venv/
 chroma_db/
+backend/data/audit_log.jsonl

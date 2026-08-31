@@ -14,6 +14,20 @@ import { useEffect } from "react";
 import Appendix from "./pages/Appendix.jsx";
 import LiveUpload from "./pages/LiveUpload.jsx";
 
+function NotFound() {
+  return (
+    <div className="max-w-2xl mx-auto px-6 py-32 text-center">
+      <div className="num text-6xl font-semibold text-brass mb-4">404</div>
+      <h1 className="font-display text-2xl font-semibold mb-3">
+        This page settled somewhere else.
+      </h1>
+      <p className="text-ink-muted mb-8">
+        There's no route here. Head back to the dashboard or ask the ledger directly.
+      </p>
+      <a href="/" className="inline-block px-5 py-3 rounded-full bg-brass text-bg font-medium text-sm hover:bg-brass-soft transition-colors">Back to home</a>
+    </div>
+  );
+}
 
 const PAGE_TITLES = {
   "/": "Settl.ai — Reconciliation, grounded",
@@ -66,6 +80,7 @@ export default function App() {
           <Route path="/trend" element={<PageFade><Trend /></PageFade>} />
           <Route path="/appendix" element={<PageFade><Appendix /></PageFade>} />
           <Route path="/upload" element={<PageFade><LiveUpload /></PageFade>} />
+          <Route path="*" element={<PageFade><NotFound /></PageFade>} />
         </Routes>
       </AnimatePresence>
     </div>
