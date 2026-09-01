@@ -45,9 +45,7 @@ dashboard on Vercel**.
 
 ## 🖥️ Dashboard Preview
 
-> Drop screenshots into `frontend/assets/` and link them here, e.g.:
->
-> `[![Dashboard](./assets/dashboard.png)](./assets/dashboard.png)`
+ [![Dashboard](./assets/dashboard.png)](./assets/dashboard.png)
 
 The app includes:
 
