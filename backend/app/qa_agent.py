@@ -11,11 +11,15 @@ from google import genai
 from dotenv import load_dotenv
 from audit import log_decision
 from embeddings import search
+from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeoutError
 
 load_dotenv(Path(__file__).parent.parent / ".env")
 client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
 MODEL = "gemini-3.5-flash-lite" 
+
+GEMINI_TIMEOUT_SECONDS = 15
+_llm_executor = ThreadPoolExecutor(max_workers=4)
 
 ORDER_ID_PATTERN = re.compile(r"order_\w+")
 
@@ -112,7 +116,23 @@ def ask(question, k=5, simulate_outage=False, history=None):
         )
 
     prompt = f"{SYSTEM_PROMPT}{history_section}\n\nRecords:\n{context}\n\nQuestion: {question}\n\nAnswer:"
-    response = client.models.generate_content(model=MODEL, contents=prompt)
+    future = _llm_executor.submit(
+    client.models.generate_content, model=MODEL, contents=prompt
+    )
+    try:
+        response = future.result(timeout=GEMINI_TIMEOUT_SECONDS)
+    except FutureTimeoutError:
+        result = {
+        "question": question,
+        "answer": "The reasoning service is taking too long to respond, so I'm escalating this to a human reviewer rather than making you wait.",
+        "retrieved_ids": list(retrieved_ids),
+        "cited_ids": [],
+        "is_refusal": True,
+        "valid_citations": None,
+    }
+    log_decision("timeout_fallback", "Gemini call exceeded timeout — escalated instead of hanging",
+                 question=question, answer=result["answer"], is_refusal=True)
+    return result
 
     answer = response.text.strip()
 
