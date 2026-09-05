@@ -123,16 +123,16 @@ def ask(question, k=5, simulate_outage=False, history=None):
         response = future.result(timeout=GEMINI_TIMEOUT_SECONDS)
     except FutureTimeoutError:
         result = {
-        "question": question,
-        "answer": "The reasoning service is taking too long to respond, so I'm escalating this to a human reviewer rather than making you wait.",
-        "retrieved_ids": list(retrieved_ids),
-        "cited_ids": [],
-        "is_refusal": True,
-        "valid_citations": None,
-    }
-    log_decision("timeout_fallback", "Gemini call exceeded timeout — escalated instead of hanging",
-                 question=question, answer=result["answer"], is_refusal=True)
-    return result
+            "question": question,
+            "answer": "The reasoning service is taking too long to respond, so I'm escalating this to a human reviewer rather than making you wait.",
+            "retrieved_ids": list(retrieved_ids),
+            "cited_ids": [],
+            "is_refusal": True,
+            "valid_citations": None,
+        }
+        log_decision("timeout_fallback", "Gemini call exceeded timeout — escalated instead of hanging",
+                     question=question, answer=result["answer"], is_refusal=True)
+        return result
 
     answer = response.text.strip()
 
